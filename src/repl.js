@@ -7,22 +7,17 @@ var
 	repl      = require('repl'),
 
 	parseArgs = require('./parseArgs'),
-	console   = require('./console'),
+	console   = require('./console');
 
-	context   = {};
+global.log = console.log;
+global.dir = console.dir;
+global.L   = require('lodash');
+L.extend(global, require('./functools'));
 
-parseArgs(context, modules);
+parseArgs(global, modules);
 
 instance = repl.start({
 	prompt: 'js > ',
 	ignoreUndefined: true,
 	useGlobal: true
 });
-
-for (var key in context) if (context.hasOwnProperty(key))
-{
-	global[key] = context[key];
-}
-
-global.dir = console.dir;
-global.L   = require('lodash');
