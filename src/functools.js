@@ -16,16 +16,25 @@ functools.logAs = function (name)
 	return console.log.bind(console, name);
 };
 
-var reFunction = /^(function(?:[^{]*){)/;
+var reFunction = /^(function(?:[^{]*))({[\s\S]*)/;
 
-functools.signature = function (fn)
+functools.signature = function (fn, bodyToo)
 {
 	var
 		view  = fn.toString(),
-		match = reFunction.exec(view);
+		match = reFunction.exec(view),
+		out;
 
 	if (match)
 	{
-		console.log(clc.bold(match[1]) + ' ...');
+		if (bodyToo)
+		{
+			out = clc.bold(match[1]) + match[2];
+		}
+		else
+		{
+			out = clc.bold(match[1].trim());
+		}
+		console.log(out);
 	}
 };
