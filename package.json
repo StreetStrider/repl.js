@@ -1,0 +1,15 @@
+{
+	"name"   : "repl.js",
+	"version": "1.0.0",
+	"author" : "StreetStrider",
+	"license": "MIT",
+	"private": true,
+
+	"main": "repl.js",
+
+	"dependencies":
+	{
+		"cli-color": ">=0.2.3",
+		"lodash": ">=2.4.1"
+	}
+}
