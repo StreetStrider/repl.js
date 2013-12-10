@@ -18,6 +18,7 @@ global.keys = Object.keys;
 
 global.L    = require('lodash');
 global.clc  = require('cli-color');
+global.YAML = require('yamljs');
 
 L.extend (global, functools);
 parseArgs(global, modules);
