@@ -11,7 +11,10 @@ module.exports = function writer (value)
 {
 	if (value instanceof Promiseable)
 	{
+		util.print(clc.up(1));
+		util.print('    \n');
 		util.print(clc.up(2));
+
 		util.print(value.toString(this.useColors) +'\n');
 
 		value = value.result;
