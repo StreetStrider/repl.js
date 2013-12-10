@@ -51,6 +51,7 @@ console.info = function info ()
 
 console.dir = function dir (object, options)
 {
+	object  || (object = global);
 	options || (options = 0);
 	if (typeof Object(options).valueOf() === 'number')
 	{
