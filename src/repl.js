@@ -9,11 +9,13 @@ var
 	parseArgs = require('./parseArgs'),
 	console   = require('./console');
 
-global.log = console.log;
-global.dir = console.dir;
-global.L   = require('lodash');
-L.extend(global, require('./functools'));
+global.log  = console.log;
+global.dir  = console.dir;
+global.keys = Object.keys;
 
+global.L    = require('lodash');
+
+L.extend (global, require('./functools'));
 parseArgs(global, modules);
 
 instance = repl.start({
