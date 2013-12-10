@@ -38,3 +38,20 @@ functools.signature = function (fn, bodyToo)
 		console.log(out);
 	}
 };
+
+functools.sg = functools.signature;
+
+functools.noop = function noop () {};
+
+functools.constant = function (value)
+{
+	return function ()
+	{
+		return value;
+	};
+};
+
+functools.same = function (value)
+{
+	return value;
+};
