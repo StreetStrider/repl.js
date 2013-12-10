@@ -19,7 +19,7 @@ global.clc  = require('cli-color');
 L.extend (global, require('./functools'));
 parseArgs(global, modules);
 
-instance = repl.start({
+global.repl = repl.start({
 	prompt: 'js > ',
 	ignoreUndefined: true,
 	useGlobal: true
