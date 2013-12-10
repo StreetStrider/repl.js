@@ -7,6 +7,7 @@ var
 	repl      = require('repl'),
 
 	parseArgs = require('./parseArgs'),
+	writer    = require('./writer'),
 	console   = require('./console');
 
 global.log  = console.log;
@@ -22,5 +23,6 @@ parseArgs(global, modules);
 global.repl = repl.start({
 	prompt: 'js > ',
 	ignoreUndefined: true,
-	useGlobal: true
+	useGlobal: true,
+	writer: writer
 });
