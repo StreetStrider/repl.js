@@ -14,6 +14,7 @@ global.dir  = console.dir;
 global.keys = Object.keys;
 
 global.L    = require('lodash');
+global.clc  = require('cli-color');
 
 L.extend (global, require('./functools'));
 parseArgs(global, modules);

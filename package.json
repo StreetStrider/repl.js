@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"author" : "StreetStrider",
 	"license": "MIT",
 	"private": true,
