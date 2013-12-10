@@ -30,14 +30,26 @@ Promiseable.promise = function (status, useColors)
 	}
 	else
 	{
-		var r = util.format('[Promise: %s]', status);
-		if (useColors)
+		if (status !== 'timeout')
 		{
-			var color = {
-				resolved: 'green',
-				rejected: 'red'
-			}[status];
-			r = clc[color](r);
+			var r = util.format('[Promise: %s]', status);
+			if (useColors)
+			{
+				var color = {
+					resolved: 'green',
+					rejected: 'red',
+					timeout:  'red'
+				}[status];
+				r = clc[color](r);
+			}
+		}
+		else
+		{
+			var r = '[Timeout]';
+			if (useColors)
+			{
+				r = clc.red(r);
+			}
 		}
 	}
 	return r;
@@ -56,7 +68,7 @@ evaler.evaler = function evaler (cmd, context, filename, callback)
 			var box = { callback: callback };
 			r.then(resolved.bind(this, box), rejected.bind(this, box));
 
-			// timeout here {#box}
+			timeout(box);
 		}
 		else
 		{
@@ -69,14 +81,30 @@ evaler.evaler = function evaler (cmd, context, filename, callback)
 	}
 };
 
-function resolved (callback, result)
+function resolved (box, result)
 {
-	callback = callback.callback;
+	var callback = box.callback;
+	box.callback = noop;
 	callback(null, new Promiseable('resolved', result));
 }
 
-function rejected (callback)
+function rejected (box, result)
 {
-	callback = callback.callback;
+	var callback = box.callback;
+	box.callback = noop;
 	callback(null, new Promiseable('rejected', result));
 }
+
+var T = 5 * 1000;
+
+function timeout (box)
+{
+	setTimeout(function ()
+	{
+		var callback = box.callback;
+		box.callback = noop;
+		callback(null, new Promiseable('timeout'));
+	}, T);
+}
+
+function noop () {}
