@@ -11,9 +11,9 @@ module.exports = function writer (value)
 	if (value.then && typeof value.then === 'function')
 	{
 		// async
-		value.then(asyncSuccess.bind(this), asyncError.bind(this));
+		value.then(asyncResolved.bind(this), asyncRejected.bind(this));
 
-		return clc[util.inspect.styles.special](_promise);
+		return clc[util.inspect.styles.special](_promise());
 	}
 	else
 	{
@@ -21,21 +21,26 @@ module.exports = function writer (value)
 	}
 };
 
-function asyncSuccess (value)
+function asyncResolved (value)
 {
-	asyncOutput.call(this, 'green', value);
+	asyncOutput.call(this, 'resolved', value);
 }
 
-function asyncError (value)
+function asyncRejected (value)
 {
-	asyncOutput.call(this, 'red', value);
+	asyncOutput.call(this, 'rejected', value);
 }
 
-function asyncOutput (color, value)
+function asyncOutput (status, value)
 {
+	var color = {
+		resolved: 'green',
+		rejected: 'red'
+	}[status];
+
 	expose(value);
 	util.print(
-		'\n'+ clc[color](_promise) +'\n'+
+		'\n'+ clc[color](_promise(status)) +'\n'+
 		inspect.call(this, value) +'\n'+
 		this.prompt
 	);
@@ -49,4 +54,14 @@ function inspect (value)
 	});
 }
 
-var _promise = '[Promise]';
+function _promise (status)
+{
+	if (! status)
+	{
+		return '[Promise]';
+	}
+	else
+	{
+		return util.format('[Promise: %s]', status);
+	}
+}
