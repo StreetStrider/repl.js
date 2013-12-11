@@ -1,71 +1,113 @@
+/*
+ * name
+ * path
+ * alias=name
+ * alias=path
+ */
 
+var Path = require('path');
 
-
-var
-	cwd  = process.cwd(),
-	path = require('path');
-
-module.exports = function parseArgs (context, modules)
+module.exports = function parseArgs (modules)
 {
+	var context = {};
+
 	modules.forEach(function (module)
 	{
-		if (module.match(/^[a-zA-Z_][a-zA-Z01-9_-]*$/))
+		var pair, alias, path, mod;
+
+		pair = tryPair(module);
+		if (! pair) return;
+
+		alias = pair[0];
+		path  = pair[1];
+
+		mod = tryModule(path);
+		if (! mod) return;
+
+		if (alias === path)
 		{
-			var moduleVar = varName(module);
-			tryModule(context, moduleVar, module);
+			console.info('Loaded `'+ path +'`.');
 		}
 		else
 		{
-			var match = module.match(/^([a-zA-Z_][a-zA-Z01-9_]*)=(.+)$/);
-			if (match)
-			{
-				var
-					moduleVar  = match[1],
-					modulePath = path.join(cwd, match[2]);
-
-				tryModule(context, moduleVar, modulePath);
-			}
-			else
-			{
-				var match = module.match(/([a-zA-Z_][a-zA-Z01-9_-]*)(\.[^\/]*)?$/);
-				if (match)
-				{
-					var
-						moduleVar  = varName(match[1]),
-						modulePath = path.join(cwd, module);
-
-					tryModule(context, moduleVar, modulePath);
-				}
-				else
-				{
-					console.warn('Cannot recognize module `'+ module +'`.');
-				}
-			}
+			console.info('Loaded `'+ path +'` as `'+ alias +'`.');
 		}
+
+		context[alias] = mod;
 	});
+
+	return context;
 };
 
-function tryModule (context, moduleVar, modulePath)
+function tryPair (module)
 {
-	try
+	var alias, path;
+	if (~ module.indexOf('='))
 	{
-		context[moduleVar] = require(modulePath);
-		if (moduleVar === modulePath)
+		var match;
+		if (match = module.match(/^([^=]+)=(.+)$/))
 		{
-			console.info('Loaded `'+ moduleVar +'`.');
+			alias = match[1];
+			path  = match[2];
 		}
 		else
 		{
-			console.info('Loaded `'+ modulePath +'` as `'+ moduleVar +'`.');
+			console.error('Cannot interpet input `'+ module +'`.');
+			return;
 		}
+	}
+	else
+	{
+		alias = module;
+		path  = module;
+	}
+
+	var s_alias = simplify(alias);
+	if (! s_alias)
+	{
+		console.error('Cannot create variable for `'+ alias + '`.');
+		return;
+	}
+
+	return [ s_alias, path ];
+}
+
+function tryModule (path)
+{
+	var _path = path;
+	try
+	{
+		if (isPathAndRelative(path))
+		{
+			path = Path.join(process.cwd(), path);
+		}
+		return require(path);
 	}
 	catch (e)
 	{
-		console.error('Module `'+ modulePath +'` cannot be found.');
+		console.error('Module `'+ path +'`('+ _path +'): '+ e);
 	}
 }
 
-function varName (moduleName)
+function isPathAndRelative (path)
 {
-	return moduleName.replace(/-/g, '_').replace(/[^a-zA-Z01-9_]/g, '');
+	if (~ path.indexOf('/'))
+	{
+		return Path.resolve(path) !== path;
+	}
+	return false; // not a path at all
+}
+
+function simplify (name)
+{
+	if (~ name.indexOf('/'))
+	{
+		name = Path.basename(name, '.js');
+	}
+
+	name = name
+		.replace(/-/g, '_')
+		.replace(/[^a-zA-Z01-9_]/g, '');
+
+	return name;
 }

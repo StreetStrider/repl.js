@@ -20,8 +20,8 @@ global.L    = require('lodash');
 global.clc  = require('cli-color');
 global.YAML = require('yamljs');
 
-L.extend (global, functools);
-parseArgs(global, modules);
+L.extend(global, functools);
+L.extend(global, parseArgs(modules));
 
 global.repl = repl.start({
 	prompt: 'js > ',
