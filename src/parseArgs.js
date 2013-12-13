@@ -91,7 +91,7 @@ function tryModule (path)
 
 function isPathAndRelative (path)
 {
-	if (~ path.indexOf('/'))
+	if (~ path.indexOf('/') || ~ path.indexOf('.js'))
 	{
 		return Path.resolve(path) !== path;
 	}
