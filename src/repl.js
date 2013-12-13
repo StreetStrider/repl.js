@@ -14,6 +14,7 @@ var
 
 global.log  = console.log;
 global.dir  = console.dir;
+global.dir$ = function (obj) { global.dir(obj, Infinity); };
 global.keys = Object.keys;
 
 global.L    = require('lodash');
