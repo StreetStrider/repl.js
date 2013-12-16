@@ -24,10 +24,13 @@ global.YAML = require('yamljs');
 L.extend(global, functools);
 L.extend(global, parseArgs(modules));
 
-global.repl = repl.start({
-	prompt: 'js > ',
-	ignoreUndefined: true,
-	useGlobal: true,
-	eval: evaler,
-	writer: writer
-});
+module.exports =
+{
+	start: repl.start.bind(repl, {
+		prompt: 'js > ',
+		ignoreUndefined: true,
+		useGlobal: true,
+		eval: evaler,
+		writer: writer
+	})
+};

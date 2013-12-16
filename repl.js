@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('./src/repl');
+global.repl = require('./src/repl').start();
