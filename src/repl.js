@@ -47,6 +47,7 @@ function start (modules)
 	});
 
 	instance.context = context;
+	instance.context.repl = instance;
 
 	return instance;
 }
