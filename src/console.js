@@ -2,6 +2,8 @@
 
 
 var
+	util = require('util'),
+
 	_   = require('lodash'),
 	clc = require('cli-color'),
 

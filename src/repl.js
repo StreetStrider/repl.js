@@ -2,7 +2,10 @@
 
 
 var
+	vm        = require('vm'),
 	repl      = require('repl'),
+
+	_         = require('lodash'),
 
 	parseArgs = require('./parseArgs'),
 	evaler    = require('./evaler').evaler,
@@ -19,23 +22,31 @@ function start (modules)
 {
 	modules || (modules = []);
 
-	global.log  = console.log;
-	global.dir  = console.dir;
-	global.dir$ = function (obj) { global.dir(obj, Infinity); };
-	global.keys = Object.keys;
+	var context = vm.createContext({
+		console: console,
 
-	global.L    = require('lodash');
-	global.clc  = require('cli-color');
-	global.YAML = require('yamljs');
+		log: console.log,
+		dir: console.dir,
+		dir$: function (obj) { console.dir(obj, Infinity); },
+		keys: Object.keys,
 
-	L.extend(global, functools);
-	L.extend(global, parseArgs(modules));
+		L: _,
+		clc: require('cli-color'),
+		YAML: require('yamljs')
+	});
 
-	return repl.start({
+	_.extend(context, functools);
+	_.extend(context, parseArgs(modules));
+
+	var instance = repl.start({
 		prompt: 'js > ',
 		ignoreUndefined: true,
-		useGlobal: true,
+		// useGlobal: false,
 		eval: evaler,
 		writer: writer
 	});
+
+	instance.context = context;
+
+	return instance;
 }

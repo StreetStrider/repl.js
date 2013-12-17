@@ -4,6 +4,7 @@
 var evaler = module.exports = {};
 
 var
+	vm   = require('vm'),
 	util = require('util'),
 	clc  = require('cli-color');
 
@@ -60,7 +61,7 @@ evaler.evaler = function evaler (cmd, context, filename, callback)
 {
 	try
 	{
-		var r = eval(cmd);
+		var r = vm.runInContext(cmd, context, filename);
 		if (r && r.then && typeof r.then === 'function')
 		{
 			util.print(Promiseable.promise(null, this.useColors) +'\n ...\n');
