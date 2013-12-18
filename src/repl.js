@@ -23,6 +23,8 @@ function start (modules)
 	modules || (modules = []);
 
 	var context = vm.createContext({
+		process: process,
+
 		keys: Object.keys,
 
 		L: _,
