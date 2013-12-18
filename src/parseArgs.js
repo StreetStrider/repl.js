@@ -5,7 +5,10 @@
  * alias=path
  */
 
-var Path = require('path');
+var
+	Path = require('path'),
+	Console = require('./console'),
+	console = new Console(process.stdout, process.stdout, global);
 
 module.exports = function parseArgs (modules)
 {

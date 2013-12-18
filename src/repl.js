@@ -11,7 +11,7 @@ var
 	evaler    = require('./evaler').evaler,
 	writer    = require('./writer'),
 	functools = require('./functools'),
-	console   = require('./console'); /* careful */
+	Console   = require('./console');
 
 module.exports =
 {
@@ -23,11 +23,6 @@ function start (modules)
 	modules || (modules = []);
 
 	var context = vm.createContext({
-		console: console,
-
-		log: console.log,
-		dir: console.dir,
-		dir$: function (obj) { console.dir(obj, Infinity); },
 		keys: Object.keys,
 
 		L: _,
@@ -48,6 +43,17 @@ function start (modules)
 
 	instance.context = context;
 	instance.context.repl = instance;
+
+	var console = new Console(instance.outputStream, instance.outputStream, context);
+
+	_.extend(context,
+	{
+		console: console,
+
+		log: console.log,
+		dir: console.dir,
+		dir$: function (obj) { console.dir(obj, Infinity); }
+	});
 
 	return instance;
 }
