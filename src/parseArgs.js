@@ -8,7 +8,7 @@
 var
 	Path = require('path'),
 	Console = require('./console'),
-	console = new Console(process.stdout, process.stdout, global);
+	console = new Console;
 
 module.exports = function parseArgs (modules)
 {

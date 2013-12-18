@@ -12,7 +12,11 @@ module.exports = Console;
 
 function Console (stdout, stderr, context)
 {
-	$Console.apply(this, arguments);
+	stdout  || (stdout  = process.stdout);
+	stderr  || (stderr  = process.stdout);
+	context || (context = global);
+
+	$Console.call(this, stdout, stderr, context);
 	this.global = context;
 }
 
