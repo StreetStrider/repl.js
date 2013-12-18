@@ -52,7 +52,7 @@ function start (modules)
 
 		log: console.log,
 		dir: console.dir,
-		dir$: function (obj) { console.dir(obj, Infinity); }
+		dir$: console.dir$
 	});
 
 	return instance;

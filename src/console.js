@@ -17,6 +17,8 @@ function Console (stdout, stderr, context)
 	context || (context = global);
 
 	$Console.call(this, stdout, stderr, context);
+	this.dir$ = this.dir$.bind(this);
+
 	this.global = context;
 }
 
@@ -69,4 +71,9 @@ Console.prototype.dir = function dir (object, options)
 	}
 	_.extend(options, { colors: true });
 	this.log(util.inspect(object, options));
+};
+
+Console.prototype.dir$ = function dir$ (object)
+{
+	this.dir(object, Infinity);
 };
