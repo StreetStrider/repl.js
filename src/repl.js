@@ -24,6 +24,7 @@ function start (modules)
 
 	var context = vm.createContext({
 		process: process,
+		require: require,
 
 		keys: Object.keys,
 
