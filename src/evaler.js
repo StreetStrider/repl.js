@@ -84,28 +84,30 @@ evaler.evaler = function evaler (cmd, context, filename, callback)
 
 function resolved (box, result)
 {
-	var callback = box.callback;
-	box.callback = noop;
-	callback(null, new Promiseable('resolved', result));
+	_clear(box, 'resolved', result);
 }
 
 function rejected (box, result)
 {
-	var callback = box.callback;
-	box.callback = noop;
-	callback(null, new Promiseable('rejected', result));
+	_clear(box, 'rejected', result);
 }
 
 var T = 5 * 1000;
 
 function timeout (box)
 {
-	setTimeout(function ()
+	box.timer = setTimeout(function ()
 	{
-		var callback = box.callback;
-		box.callback = noop;
-		callback(null, new Promiseable('timeout'));
+		_clear(box, 'timeout');
 	}, T);
+}
+
+function _clear (box, status, value)
+{
+	clearTimeout(box.timer);
+	var callback = box.callback;
+	box.callback = noop;
+	callback(null, new Promiseable(status, value));
 }
 
 function noop () {}
