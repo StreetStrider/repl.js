@@ -4,6 +4,7 @@
 var
 	vm        = require('vm'),
 	repl      = require('repl'),
+	path      = require('path'),
 
 	_         = require('lodash'),
 
@@ -22,8 +23,12 @@ function start (modules)
 {
 	modules || (modules = []);
 
+	module.filename = path.resolve('repl');
+	module.paths = require('module')._nodeModulePaths(module.filename);
+
 	var context = vm.createContext({
 		process: process,
+		module: module,
 		require: require,
 
 		keys: Object.keys,
