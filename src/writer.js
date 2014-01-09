@@ -18,7 +18,7 @@ module.exports = function writer (value)
 		util.print(value.toString(this.useColors) +'\n');
 
 		value = value.result;
-		expose(value);
+		this.context._ = value;
 		return inspect.call(this, value);
 	}
 	else
