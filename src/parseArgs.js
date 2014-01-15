@@ -10,6 +10,9 @@ var
 	Console = require('./console'),
 	console = new Console;
 
+module.filename = Path.resolve('parseArgs');
+module.paths = require('module')._nodeModulePaths(module.filename);
+
 module.exports = function parseArgs (modules)
 {
 	var context = {};
