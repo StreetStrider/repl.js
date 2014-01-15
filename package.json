@@ -3,7 +3,6 @@
 	"version": "1.6.4",
 	"author" : "StreetStrider",
 	"license": "MIT",
-	"private": true,
 
 	"bin": "./repl.js",
 	"main": "./src/repl.js",
