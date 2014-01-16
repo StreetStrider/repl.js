@@ -56,6 +56,7 @@ function start (modules)
 
 	_.extend(context,
 	{
+		global: context,
 		console: console,
 
 		log: console.log,
