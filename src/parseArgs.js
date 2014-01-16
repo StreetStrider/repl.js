@@ -19,7 +19,7 @@ module.exports = function parseArgs (modules)
 
 	modules.forEach(function (module)
 	{
-		var pair, alias, path, mod;
+		var pair, alias, path, mod, realpath;
 
 		pair = tryPair(module);
 		if (! pair) return;
@@ -27,18 +27,13 @@ module.exports = function parseArgs (modules)
 		alias = pair[0];
 		path  = pair[1];
 
-		mod = tryModule(path);
-		if (! mod) return;
+		pair = tryModule(path);
+		if (! pair) return;
 
-		if (alias === path)
-		{
-			console.info('Loaded `'+ path +'`.');
-		}
-		else
-		{
-			console.info('Loaded `'+ path +'` as `'+ alias +'`.');
-		}
+		mod = pair[0];
+		realpath = pair[1];
 
+		console.info('Loaded `'+ path +'`('+ realpath +') as `'+ alias +'`.');
 		context[alias] = mod;
 	});
 
@@ -81,27 +76,23 @@ function tryPair (module)
 function tryModule (path)
 {
 	var _path = path;
+
+	/* as module name */
 	try
 	{
-		if (isPathAndRelative(path))
-		{
-			path = Path.join(process.cwd(), path);
-		}
-		return require(path);
+		return [ require(path), path ];
 	}
-	catch (e)
-	{
-		console.error('Module `'+ path +'`('+ _path +'): '+ e);
-	}
-}
+	catch (e) {}
 
-function isPathAndRelative (path)
-{
-	if (~ path.indexOf('/') || ~ path.indexOf('.js'))
+	/* as path */
+	path = Path.resolve(path);
+	try
 	{
-		return Path.resolve(path) !== path;
+		return [ require(path), path ];
 	}
-	return false; // not a path at all
+	catch (e) {}
+
+	console.error('Module `'+ path +'`('+ _path +').');
 }
 
 function simplify (name)
