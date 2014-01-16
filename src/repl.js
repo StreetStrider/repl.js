@@ -16,12 +16,19 @@ var
 
 module.exports =
 {
+	run:   run,
 	start: start
 };
 
-function start (modules)
+function run (argv)
 {
-	modules || (modules = []);
+	return start({}, argv);
+}
+
+function start (options, modulePairs)
+{
+	options     || (options = {});
+	modulePairs || (modulePairs = []);
 
 	module.filename = path.resolve('repl');
 	module.paths = require('module')._nodeModulePaths(module.filename);
@@ -39,15 +46,21 @@ function start (modules)
 	});
 
 	_.extend(context, functools);
-	_.extend(context, parseArgs(modules));
+	_.extend(context, parseArgs(modulePairs));
 
-	var instance = repl.start({
+	var instance = repl.start(_.extend(
+	{},
+	{
 		prompt: 'js > ',
 		ignoreUndefined: true,
-		// useGlobal: false,
+
 		eval: evaler,
 		writer: writer
-	});
+	},
+	options,
+	{
+		useGlobal: false,
+	}));
 
 	instance.context = context;
 	instance.context.repl = instance;
