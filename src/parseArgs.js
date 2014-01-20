@@ -6,9 +6,8 @@
  */
 
 var
-	Path = require('path'),
-	Console = require('./console'),
-	console = new Console;
+	Path    = require('path'),
+	console = require('str-console');
 
 module.filename = Path.resolve('parseArgs');
 module.paths = require('module')._nodeModulePaths(module.filename);

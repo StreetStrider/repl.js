@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "1.8.0",
+	"version": "1.8.1",
 	"author" : "StreetStrider",
 	"license": "MIT",
 
@@ -11,6 +11,7 @@
 	{
 		"cli-color": ">=0.2.3",
 		"yamljs": "0.1.4",
-		"lodash": ">=2.4.1"
+		"lodash": ">=2.4.1",
+		"str-console": "~1.1.1"
 	}
 }

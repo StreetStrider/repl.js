@@ -12,7 +12,7 @@ var
 	evaler    = require('./evaler').evaler,
 	writer    = require('./writer'),
 	functools = require('./functools'),
-	Console   = require('./console');
+	_console  = require('str-console');
 
 module.exports =
 {
@@ -65,7 +65,7 @@ function start (options, modulePairs)
 	instance.context = context;
 	instance.context.repl = instance;
 
-	var console = new Console(instance.outputStream, instance.outputStream, context);
+	var console = new _console.Console(instance.outputStream, instance.outputStream, context);
 
 	_.extend(context,
 	{
