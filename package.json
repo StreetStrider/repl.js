@@ -1,8 +1,19 @@
 {
 	"name"   : "repl.js",
-	"version": "1.8.1",
+	"version": "1.8.2",
 	"author" : "StreetStrider",
 	"license": "MIT",
+
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/StreetStrider/repl.js.git"
+	},
+	"bugs":
+	{
+		"url": "https://github.com/StreetStrider/repl.js/issues"
+	},
+	"homepage": "https://github.com/StreetStrider/repl.js",
 
 	"bin": "./repl.js",
 	"main": "./src/repl.js",
