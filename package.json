@@ -1,8 +1,23 @@
 {
 	"name"   : "repl.js",
-	"version": "1.8.2",
+	"version": "1.8.3",
+
+	"description": "JS interactive repl with promise support & cli module requiring",
 	"author" : "StreetStrider",
 	"license": "MIT",
+
+	"keywords":
+	[
+		"repl",
+		"cli",
+		"shell",
+		"node",
+		"promise",
+		"deferred",
+		"interactive",
+		"require",
+		"repl.js"
+	],
 
 	"repository":
 	{
