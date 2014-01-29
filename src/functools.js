@@ -41,6 +41,11 @@ functools.signature = function (fn, bodyToo)
 
 functools.sg = functools.signature;
 
+functools.sgg = function (fn)
+{
+	return functools.sg(fn, true);
+};
+
 functools.noop = function noop () {};
 
 functools.constant = function (value)
