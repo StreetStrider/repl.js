@@ -55,3 +55,19 @@ functools.same = function (value)
 {
 	return value;
 };
+
+functools.get = function (name)
+{
+	return function (object)
+	{
+		return object[name];
+	};
+};
+
+functools.mapget = function (name)
+{
+	return function (L)
+	{
+		return L.map(functools.get(name));
+	};
+};
