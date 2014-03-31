@@ -4,7 +4,9 @@ Can be used in shell & programmatically.
 
 ## as shell
 Modules can be simply required onstart.
+
 Custom prompt: `js >`
+
 Undefined values is ignored.
 
 ```sh
@@ -15,7 +17,7 @@ Loaded `./src/parseArgs`(./src/parseArgs) as `parseArgs`.
 js > 
 ```
 
-Smart promise-like objects rendering.
+Smart promise-like objects rendering (output awaits for promise result).
 ```sh
 $ repl.js Q=q # load Q library for promises
 Loaded `q`(q) as `Q`.
@@ -31,7 +33,7 @@ Built-in utilities and functools:
 * `log` — short-cut for `console.log`
 * `keys` — short-cut for `Object.keys`
 * `signature(fn)` (also `sg`) — output function signature
-* `signature(fn, true)` — output function signature and source-code
+* `signature(fn, true)` (also `sgg`) — output function signature and source-code
 * `dir(object)` — inspect objects
 * `dir$(object)` — deep inspect objects
 * `constant(c)`  — factory for constants
@@ -39,7 +41,7 @@ Built-in utilities and functools:
 * `noop` — do noting
 
 ## other libraries & tools
-Thanks to [LoDash](lodash.com/) (https://github.com/lodash/lodash/),
+Thanks to [LoDash](http://lodash.com/) (https://github.com/lodash/lodash/),
 great functools can be used (LoDash accessible via `L`, instead of `_`).
 
 Thanks to [yamljs](https://github.com/jeremyfa/yaml.js) it is
@@ -55,4 +57,4 @@ require('repl.js').run(argv)      // shell-like start
 
 ## license
 MIT.
-© StreetStrider, 2013
+© StreetStrider, 2013 — 2014.
