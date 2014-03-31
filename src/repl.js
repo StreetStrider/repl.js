@@ -73,7 +73,7 @@ function start (options, modulePairs)
 	var instance = repl.start(options);
 
 	instance.context = context;
-	instance.context.repl = instance;
+	instance.context.instance = instance;
 
 	var _console = new Console(
 		instance.outputStream, // stdout
