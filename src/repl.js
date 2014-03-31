@@ -12,7 +12,7 @@ var
 	evaler    = require('./evaler').evaler,
 	writer    = require('./writer'),
 	functools = require('./functools'),
-	_console  = require('str-console');
+	Console  = require('str-console').Console;
 
 module.exports =
 {
@@ -57,16 +57,15 @@ function start (options, modulePairs)
 	else
 	{
 		var context = vm.createContext({
-			global: context,
 			process: process,
 			module: module,
 			require: require
 		});
 
-		extendContext = _extendContext(true, context);
+		context.global = context;
+
+		extendContext = _extendContext(false, context);
 	}
-
-
 
 	extendContext(functools);
 	extendContext(parseArgs(modulePairs));
@@ -76,23 +75,23 @@ function start (options, modulePairs)
 	instance.context = context;
 	instance.context.repl = instance;
 
-	var console = new _console.Console(
+	var _console = new Console(
 		instance.outputStream, // stdout
 		instance.outputStream, // stderr
 		instance.context.global);
 
 	extendContext({
-		console: console,
+		console: _console,
 
 		keys: Object.keys,
 
 		L: _,
 		clc: require('cli-color'),
-		YAML: require('yamljs')
+		YAML: require('yamljs'),
 
-		log: console.log,
-		dir: console.dir,
-		dir$: console.dir$
+		log: _console.log,
+		dir: _console.dir,
+		dir$: _console.dir$
 	});
 
 	return instance;
