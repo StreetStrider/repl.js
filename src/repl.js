@@ -2,9 +2,9 @@
 
 
 var
+	path      = require('path'),
 	vm        = require('vm'),
 	repl      = require('repl'),
-	path      = require('path'),
 
 	_         = require('lodash'),
 
@@ -12,7 +12,7 @@ var
 	evaler    = require('./evaler').evaler,
 	writer    = require('./writer'),
 	functools = require('./functools'),
-	_console  = require('str-console');
+	Console  = require('str-console').Console;
 
 module.exports =
 {
@@ -27,55 +27,90 @@ function run (argv)
 
 function start (options, modulePairs)
 {
-	options     || (options = {});
+	options = _.extend(
+		{},
+		{
+			prompt: 'js > ',
+			ignoreUndefined: true,
+
+			eval: evaler,
+			writer: writer,
+
+			useGlobal: false
+		},
+		options || {}
+	);
+
 	modulePairs || (modulePairs = []);
 
 	module.filename = path.resolve('repl');
 	module.paths = require('module')._nodeModulePaths(module.filename);
 
-	var context = vm.createContext({
-		process: process,
-		module: module,
-		require: require,
+	var
+		useGlobal = !! options.useGlobal,
+		extendContext;
+
+	if (useGlobal)
+	{
+		extendContext = _extendContext();
+	}
+	else
+	{
+		var context = vm.createContext({
+			process: process,
+			module: module,
+			require: require
+		});
+
+		context.global = context;
+
+		extendContext = _extendContext(false, context);
+	}
+
+	extendContext(functools);
+	extendContext(parseArgs(modulePairs));
+
+	var instance = repl.start(options);
+
+	instance.context = context;
+	instance.context.instance = instance;
+
+	var _console = new Console(
+		instance.outputStream, // stdout
+		instance.outputStream, // stderr
+		instance.context.global);
+
+	extendContext({
+		console: _console,
 
 		keys: Object.keys,
 
 		L: _,
 		clc: require('cli-color'),
-		YAML: require('yamljs')
-	});
+		YAML: require('yamljs'),
 
-	_.extend(context, functools);
-	_.extend(context, parseArgs(modulePairs));
-
-	var instance = repl.start(_.extend(
-	{},
-	{
-		prompt: 'js > ',
-		ignoreUndefined: true,
-
-		eval: evaler,
-		writer: writer
-	},
-	options,
-	{
-		useGlobal: false,
-	}));
-
-	instance.context = context;
-	instance.context.repl = instance;
-
-	var console = new _console.Console(instance.outputStream, instance.outputStream, context);
-
-	_.extend(context,
-	{
-		global: context,
-		console: console,
-
-		log: console.log,
-		dir: console.dir,
-		dir$: console.dir$
+		log: _console.log,
+		dir: _console.dir,
+		dir$: _console.dir$
 	});
 
 	return instance;
+}
+
+function _extendContext (useGlobal, context)
+{
+	if (! useGlobal)
+	{
+		return function (object)
+		{
+			_.extend(context, object);
+		};
+	}
+	else
+	{
+		return function (object)
+		{
+			_.extend(global, object);
+		};
+	}
 }
