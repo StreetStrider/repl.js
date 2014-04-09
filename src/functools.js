@@ -77,14 +77,14 @@ functools.mapget = function (name)
 	};
 };
 
-functools.allkeys = Object.getOwnPropertyNames;
+functools.keysall = Object.getOwnPropertyNames;
 
-functools.allkeys$ = function (obj)
+functools.keysall$ = function (object)
 {
 	var r = [];
 	do
 	{
-		functools.allkeys(obj)
+		functools.keysall(object)
 		.forEach(function (name)
 		{
 			if (r.indexOf(name) === -1)
@@ -93,6 +93,6 @@ functools.allkeys$ = function (obj)
 			}
 		})
 	}
-	while (obj = Object.getPrototypeOf(obj));
+	while (object = Object.getPrototypeOf(object));
 	return r;
 };

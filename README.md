@@ -32,6 +32,8 @@ Built-in utilities and functools:
 * `logAs(name)` — factory for console.log loggers
 * `log` — short-cut for `console.log`
 * `keys` — short-cut for `Object.keys`
+* `keysall(object)` — like keys, but retrieve non-enumerated own properties as well
+* `keysall$(object)` — also look in prototype chain
 * `signature(fn)` (also `sg`) — output function signature
 * `signature(fn, true)` (also `sgg`) — output function signature and source-code
 * `dir(object)` — inspect objects
