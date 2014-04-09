@@ -76,3 +76,23 @@ functools.mapget = function (name)
 		return L.map(functools.get(name));
 	};
 };
+
+functools.allkeys = Object.getOwnPropertyNames;
+
+functools.allkeys$ = function (obj)
+{
+	var r = [];
+	do
+	{
+		functools.allkeys(obj)
+		.forEach(function (name)
+		{
+			if (r.indexOf(name) === -1)
+			{
+				r.push(name);
+			}
+		})
+	}
+	while (obj = Object.getPrototypeOf(obj));
+	return r;
+};
