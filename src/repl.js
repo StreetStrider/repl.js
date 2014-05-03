@@ -7,12 +7,14 @@ var
 	repl      = require('repl'),
 
 	_         = require('lodash'),
+	clc       = require('cli-color'),
+	YAML      = require('yamljs'),
 
 	parseArgs = require('./parseArgs'),
 	evaler    = require('./evaler').evaler,
 	writer    = require('./writer'),
 	functools = require('./functools'),
-	Console  = require('str-console').Console;
+	Console   = require('str-console').Console;
 
 module.exports =
 {
@@ -86,8 +88,8 @@ function start (options, modulePairs)
 		keys: Object.keys,
 
 		L: _,
-		clc: require('cli-color'),
-		YAML: require('yamljs'),
+		clc:  clc,
+		YAML: YAML,
 
 		log: _console.log,
 		dir: _console.dir,
