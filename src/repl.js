@@ -83,6 +83,7 @@ function start (options, modulePairs)
 
 	extendContext({
 		console: _console,
+		require: require,
 
 		L: _,
 		Q: Q,
