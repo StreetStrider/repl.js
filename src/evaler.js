@@ -61,7 +61,16 @@ evaler.evaler = function evaler (cmd, context, filename, callback)
 {
 	try
 	{
-		var r = vm.runInContext(cmd, context, filename);
+		var r;
+		if (this.useGlobal)
+		{
+			r = vm.runInThisContext(cmd, filename);
+		}
+		else
+		{
+			r = vm.runInContext(cmd, context, filename);
+		}
+
 		if (r && r.then && typeof r.then === 'function')
 		{
 			util.print(Promiseable.promise(null, this.useColors) +'\n ...\n');

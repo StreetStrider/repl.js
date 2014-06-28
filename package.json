@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "1.9.3",
+	"version": "1.9.4",
 
 	"description": "JS interactive repl with promise support & cli module requiring",
 	"author" : "StreetStrider",

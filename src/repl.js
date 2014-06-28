@@ -49,10 +49,8 @@ function start (options, modulePairs)
 	module.paths = require('module')._nodeModulePaths(module.filename);
 
 	var
-		useGlobal = !! options.useGlobal,
+		useGlobal = options.useGlobal = !! options.useGlobal,
 		extendContext;
-
-	useGlobal = false; /* global is now working wrong */
 
 	if (useGlobal)
 	{
