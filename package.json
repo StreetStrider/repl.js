@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "1.9.5",
+	"version": "1.10.0",
 
 	"description": "JS interactive repl with promise support & cli module requiring",
 	"author" : "StreetStrider",
@@ -37,7 +37,8 @@
 	{
 		"cli-color": ">=0.2.3",
 		"yamljs": "0.1.4",
-		"lodash": ">=2.4.1",
+		"lodash": "~2",
+		"bluebird": "~2",
 		"str-console": "~1.1.1"
 	}
 }

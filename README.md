@@ -46,6 +46,9 @@ Built-in utilities and functools:
 Thanks to [LoDash](http://lodash.com/) (https://github.com/lodash/lodash/),
 great functools can be used (LoDash accessible via `L`, instead of `_`).
 
+Thanks to [Bluebird](https://github.com/petkaantonov/bluebird/) for Promises A+
+and anvanced promise-features (accessible via `Q`).
+
 Thanks to [yamljs](https://github.com/jeremyfa/yaml.js) it is
 possible to require YAML files (also `YAML` object with `JSON`-like methods available).
 

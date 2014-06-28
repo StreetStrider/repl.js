@@ -7,6 +7,7 @@ var
 	repl      = require('repl'),
 
 	_         = require('lodash'),
+	Q         = require('bluebird'),
 	clc       = require('cli-color'),
 	YAML      = require('yamljs'),
 
@@ -84,6 +85,7 @@ function start (options, modulePairs)
 		console: _console,
 
 		L: _,
+		Q: Q,
 		clc:  clc,
 		YAML: YAML,
 
