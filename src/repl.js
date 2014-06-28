@@ -52,21 +52,20 @@ function start (options, modulePairs)
 		useGlobal = !! options.useGlobal,
 		extendContext;
 
+	useGlobal = false; /* global is now working wrong */
+
 	if (useGlobal)
 	{
-		extendContext = _extendContext();
+		context = global;
+		extendContext = _extendContext(global);
 	}
 	else
 	{
-		var context = vm.createContext({
-			process: process,
-			module: module,
-			require: require
-		});
+		var context = vm.createContext({});
+		extendContext = _extendContext(context);
 
+		extendContext(global);
 		context.global = context;
-
-		extendContext = _extendContext(false, context);
 	}
 
 	extendContext(functools);
@@ -80,7 +79,8 @@ function start (options, modulePairs)
 	var _console = new Console(
 		instance.outputStream, // stdout
 		instance.outputStream, // stderr
-		instance.context.global);
+		instance.context.global
+	);
 
 	extendContext({
 		console: _console,
@@ -91,28 +91,18 @@ function start (options, modulePairs)
 		clc:  clc,
 		YAML: YAML,
 
-		log: _console.log,
-		dir: _console.dir,
+		log:  _console.log,
+		dir:  _console.dir,
 		dir$: _console.dir$
 	});
 
 	return instance;
 }
 
-function _extendContext (useGlobal, context)
+function _extendContext (context)
 {
-	if (! useGlobal)
+	return function extendContext (object)
 	{
-		return function (object)
-		{
-			_.extend(context, object);
-		};
-	}
-	else
-	{
-		return function (object)
-		{
-			_.extend(global, object);
-		};
-	}
+		_.extend(context, object);
+	};
 }
