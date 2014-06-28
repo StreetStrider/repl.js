@@ -83,8 +83,6 @@ function start (options, modulePairs)
 	extendContext({
 		console: _console,
 
-		keys: Object.keys,
-
 		L: _,
 		clc:  clc,
 		YAML: YAML,

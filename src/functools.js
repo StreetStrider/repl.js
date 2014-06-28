@@ -5,20 +5,20 @@ module.exports = functools = {};
 
 var clc = require('cli-color');
 
-functools.expose = function (value, name)
+functools.expose = function expose (value, name)
 {
 	name || (name = '_');
 	global[name] = value;
 };
 
-functools.logAs = function (name)
+functools.logAs = function logAs (name)
 {
 	return console.log.bind(console, name);
 };
 
 var reFunction = /^(function(?:[^{]*))({[\s\S]*)/;
 
-functools.signature = function (fn, bodyToo)
+functools.signature = function signature (fn, bodyToo)
 {
 	var
 		view  = fn.toString(),
@@ -41,14 +41,14 @@ functools.signature = function (fn, bodyToo)
 
 functools.sg = functools.signature;
 
-functools.sgg = function (fn)
+functools.sgg = function sourceCode (fn)
 {
 	return functools.sg(fn, true);
 };
 
 functools.noop = function noop () {};
 
-functools.constant = function (value)
+functools.constant = function constant (value)
 {
 	return function ()
 	{
@@ -56,30 +56,40 @@ functools.constant = function (value)
 	};
 };
 
-functools.same = function (value)
+functools.identity = function identity (value)
 {
 	return value;
 };
 
-functools.get = function (name)
+functools.same = functools.identity;
+
+functools.get = function get (name)
 {
-	return function (object)
+	return function getter (object)
 	{
 		return object[name];
 	};
 };
 
-functools.mapget = function (name)
+functools.mapget = function mapget (name)
 {
-	return function (L)
+	return function mapgetter (L)
 	{
 		return L.map(functools.get(name));
 	};
 };
 
-functools.keysall = Object.getOwnPropertyNames;
+functools.keys = function keys (object)
+{
+	return Object.keys(object);
+};
 
-functools.keysall$ = function (object)
+functools.keysall = function keysall (object)
+{
+	return Object.getOwnPropertyNames(object);
+};
+
+functools.keysall$ = function keysall$ (object)
 {
 	var r = [];
 	do
