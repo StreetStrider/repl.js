@@ -11,6 +11,7 @@ var
 	clc       = require('cli-color'),
 	YAML      = require('yamljs'),
 
+	version   = require('../package.json').version,
 	parseArgs = require('./parseArgs'),
 	evaler    = require('./evaler').evaler,
 	writer    = require('./writer'),
@@ -74,6 +75,8 @@ function start (options, modulePairs)
 
 	instance.context = context;
 	instance.context.instance = instance;
+
+	instance.version = version;
 
 	var _console = new Console(
 		instance.outputStream, // stdout
