@@ -6,6 +6,7 @@ var
 	vm        = require('vm'),
 	repl      = require('repl'),
 
+	aux       = require('aux.js'),
 	_         = require('lodash'),
 	Q         = require('bluebird'),
 	clc       = require('cli-color'),
@@ -69,6 +70,7 @@ function start (options, modulePairs)
 	}
 
 	extendContext(functools);
+	extendContext(aux);
 	extendContext(parseArgs(modulePairs));
 
 	var instance = repl.start(options);
