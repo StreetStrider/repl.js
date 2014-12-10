@@ -4,7 +4,6 @@
 var
 	util        = require('util'),
 	clc         = require('cli-color'),
-	expose      = require('./functools').expose,
 	Promiseable = require('./evaler').Promiseable;
 
 module.exports = function writer (value)

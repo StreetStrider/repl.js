@@ -5,11 +5,6 @@ module.exports = functools = {};
 
 var clc = require('cli-color');
 
-functools.expose = function expose (value, name)
-{
-	name || (name = '_');
-	global[name] = value;
-};
 
 functools.logAs = function logAs (name)
 {
