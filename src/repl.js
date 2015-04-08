@@ -16,15 +16,20 @@ repl.start = function ()
 {
 	var instance = std.start({
 		prompt: 'js > ',
-		useGlobal: true,
 		ignoreUndefined: true
 	});
 
 	var context = instance.context;
 
-	uconsole(instance);
+	reset(context);
+	instance.on('reset', reset);
 
-	instance.writer = context.dir = dir(instance);
+	function reset (context)
+	{
+		uconsole(instance);
+
+		instance.writer = context.dir = dir(instance);
+	}
 
 	return instance;
 }
