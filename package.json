@@ -23,5 +23,11 @@
 	"scripts":
 	{
 		"start": "node src/repl"
+	},
+
+	"dependencies":
+	{
+		"aux.js": "~2",
+		"console-ultimate": "~1.1"
 	}
 }
