@@ -9,7 +9,10 @@ module.exports = function (repl)
 
 	function dir (object)
 	{
-		object || (object = context);
+		if (! arguments.length)
+		{
+			object = context
+		}
 
 		cdir(object, 0);
 	}
