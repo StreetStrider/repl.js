@@ -9,7 +9,8 @@ var
 	extend  = require('aux.js/object/extend');
 
 var
-	uconsole = require('./console');
+	uconsole = require('./console'),
+	dir = require('./dir');
 
 repl.start = function ()
 {
@@ -22,6 +23,8 @@ repl.start = function ()
 	var context = instance.context;
 
 	uconsole(instance);
+
+	instance.writer = context.dir = dir(instance);
 
 	return instance;
 }
