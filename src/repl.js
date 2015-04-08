@@ -26,5 +26,3 @@ repl.start = function ()
 
 	return instance;
 }
-
-repl.start();
