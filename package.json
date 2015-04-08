@@ -30,6 +30,7 @@
 	"dependencies":
 	{
 		"aux.js": "~2",
-		"console-ultimate": "~1.1"
+		"console-ultimate": "~1.1",
+		"cli-color": ">=0.3.3 <1.0.0"
 	}
 }

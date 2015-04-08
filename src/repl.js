@@ -14,7 +14,8 @@ var
 var
 	uconsole = require('./console'),
 	log = require('./log'),
-	dir = require('./dir');
+	dir = require('./dir'),
+	sg  = require('./sg');
 
 repl.start = function ()
 {
@@ -37,6 +38,8 @@ repl.start = function ()
 
 		/* @todo: return value issue */
 		/*instance.writer = */ context.dir = dir(instance);
+
+		sg(instance);
 	}
 
 	return instance;
