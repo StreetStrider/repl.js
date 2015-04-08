@@ -6,8 +6,10 @@ var
 	std = require('repl');
 
 var
-	extend  = require('aux.js/object/extend'),
-	Console = require('console-ultimate');
+	extend  = require('aux.js/object/extend');
+
+var
+	uconsole = require('./console');
 
 repl.start = function ()
 {
@@ -19,10 +21,7 @@ repl.start = function ()
 
 	var context = instance.context;
 
-	var output = instance.outputStream;
-	var uconsole = Console(output, output);
-
-	require('console-ultimate/global').replaceAt(context, uconsole);
+	uconsole(instance);
 
 	return instance;
 }
