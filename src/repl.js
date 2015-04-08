@@ -3,10 +3,13 @@
 var repl = module.exports = {};
 
 var
+	req = require('./req');
+
+var
 	std = require('repl');
 
 var
-	extend  = require('aux.js/object/extend');
+	extend  = req.local('aux.js/object/extend');
 
 var
 	uconsole = require('./console'),

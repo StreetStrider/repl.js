@@ -2,7 +2,8 @@
 
 
 var
-	Console = require('console-ultimate');
+	local = require('./req').local,
+	Console = local('console-ultimate');
 
 module.exports = function (repl)
 {
@@ -12,5 +13,5 @@ module.exports = function (repl)
 
 	var console = Console(output, output);
 
-	require('console-ultimate/global').replaceAt(context, console);
+	local('console-ultimate/global').replaceAt(context, console);
 }
