@@ -9,7 +9,8 @@ var
 	std = require('repl');
 
 var
-	extend  = req.local('aux.js/object/extend');
+	extend  = req.local('aux.js/object/extend'),
+	colors  = req.local('cli-color');
 
 var
 	uconsole = require('./console'),
@@ -43,6 +44,8 @@ repl.start = function ()
 		sg(instance);
 
 		aux(instance);
+
+		context.colors = colors;
 	}
 
 	return instance;
