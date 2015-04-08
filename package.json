@@ -1,0 +1,22 @@
+{
+	"name"   : "repl.js",
+	"version": "2.0.0-pre",
+
+	"description": "Node.js interactive REPL with promise support & CLI module requiring",
+	"author": "StreetStrider <teamfortresslife@gmail.com>",
+	"license": "MIT",
+
+	"keywords":
+	[
+		"repl", "cli", "shell",
+		"interactive",
+		"repl.js",
+		"promise", "deferred", "bluebird",
+		"require", "module", "resolve",
+		"node"
+	],
+
+	"homepage":            "https://github.com/StreetStrider/repl.js",
+	"repository": { "url": "https://github.com/StreetStrider/repl.js.git", "type": "git" },
+	"bugs":       { "url": "https://github.com/StreetStrider/repl.js/issues" }
+}
