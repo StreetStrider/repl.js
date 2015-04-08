@@ -15,6 +15,9 @@ module.exports = function (repl)
 		}
 
 		cdir(object, 0);
+
+		/* @todo: return value issue */
+		// return 'LOL'
 	}
 
 	return dir;

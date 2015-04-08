@@ -31,7 +31,8 @@ repl.start = function ()
 	{
 		uconsole(instance);
 
-		instance.writer = context.dir = dir(instance);
+		/* @todo: return value issue */
+		/*instance.writer = */ context.dir = dir(instance);
 	}
 
 	return instance;
