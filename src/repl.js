@@ -27,6 +27,7 @@ repl.start = function ()
 	reset(context);
 	instance.on('reset', reset);
 
+	/* @todo: check reset in other versions */
 	function reset (context)
 	{
 		uconsole(instance);
