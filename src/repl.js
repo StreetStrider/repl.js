@@ -6,7 +6,8 @@ var
 	req = require('./req');
 
 var
-	std = require('repl');
+	path = require('path'),
+	std  = require('repl');
 
 var
 	extend  = req.local('aux.js/object/extend'),
@@ -46,6 +47,8 @@ repl.start = function ()
 		aux(instance);
 
 		context.colors = colors;
+
+		req.inRepl(instance);
 	}
 
 	return instance;
