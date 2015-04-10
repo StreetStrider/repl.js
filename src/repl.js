@@ -10,8 +10,9 @@ var
 	std  = require('repl');
 
 var
-	extend  = req.local('aux.js/object/extend'),
-	colors  = req.local('cli-color');
+	extend   = req.local('aux.js/object/extend'),
+	colors   = req.local('cli-color'),
+	minimist = req.local('minimist');
 
 var
 	uconsole = require('./console'),
@@ -19,6 +20,13 @@ var
 	dir = require('./dir'),
 	sg  = require('./sg'),
 	aux = require('./aux');
+
+repl.run = function (argv)
+{
+	argv = minimist(argv);
+
+	repl.start();
+}
 
 repl.start = function ()
 {
