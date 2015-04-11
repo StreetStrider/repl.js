@@ -25,20 +25,24 @@ repl.run = function (argv)
 {
 	argv = minimist(argv);
 
-	repl.start();
+	return repl.start({ argopts: argv });
 }
 
-repl.start = function ()
+repl.start = function (options)
 {
-	var instance = std.start({
-		prompt: 'js > ',
-		ignoreUndefined: true
-	});
+	options = extend({}, defaults, options || {});
+
+	var argopts = options.argopts;
+
+	var instance = std.start(options);
 
 	var context = instance.context;
 
-	reset(context);
-	instance.on('reset', reset);
+	if (! argopts.clean)
+	{
+		reset(context);
+		instance.on('reset', reset);
+	}
 
 	/* @todo: check reset in other versions */
 	function reset (context)
@@ -60,4 +64,12 @@ repl.start = function ()
 	}
 
 	return instance;
+}
+
+var defaults =
+{
+	prompt: 'js > ',
+	ignoreUndefined: true,
+
+	argopts: {}
 }
