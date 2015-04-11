@@ -32,22 +32,25 @@ repl.start = function (options)
 {
 	options = extend({}, defaults, options || {});
 
+	var console = uconsole.console(options);
+
+	var
+		instance = std.start(options),
+		context  = instance.context;
+
 	var argopts = options.argopts;
-
-	var instance = std.start(options);
-
-	var context = instance.context;
-
 	if (! argopts.clean)
 	{
 		reset(context);
 		instance.on('reset', reset);
 	}
 
+	return instance;
+
 	/* @todo: check reset in other versions */
 	function reset (context)
 	{
-		uconsole(instance);
+		uconsole.inRepl(instance, console);
 
 		log(instance);
 
@@ -62,8 +65,6 @@ repl.start = function (options)
 
 		req.inRepl(instance);
 	}
-
-	return instance;
 }
 
 var defaults =
