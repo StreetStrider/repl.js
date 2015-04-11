@@ -15,11 +15,8 @@ var
 	minimist = req.local('minimist');
 
 var
-	uconsole = require('./console'),
-	log = require('./log'),
-	dir = require('./dir'),
-	sg  = require('./sg'),
-	aux = require('./aux');
+	utilrepl = require('./utilrepl');
+
 
 repl.run = function (argv)
 {
@@ -32,7 +29,7 @@ repl.start = function (options)
 {
 	options = extend({}, defaults, options || {});
 
-	var console = uconsole.console(options);
+	var console = utilrepl.console.Console(options);
 
 	var
 		instance = std.start(options),
@@ -50,16 +47,16 @@ repl.start = function (options)
 	/* @todo: check reset in other versions */
 	function reset (context)
 	{
-		uconsole.inRepl(instance, console);
+		utilrepl.console.inRepl(instance, console);
 
-		log(instance);
+		utilrepl.log(instance);
 
 		/* @todo: return value issue */
-		/*instance.writer = */ context.dir = dir(instance);
+		/*instance.writer = */ context.dir = utilrepl.dir(instance);
 
-		sg(instance);
+		utilrepl.sg(instance);
 
-		aux(instance);
+		utilrepl.aux(instance);
 
 		context.colors = colors;
 

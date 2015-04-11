@@ -2,7 +2,8 @@
 
 
 var
-	local = require('./req').local,
+	local = require('../req').local,
+
 	extend = local('aux.js/object/extend');
 
 module.exports = function (repl)

@@ -4,7 +4,8 @@
 var uconsole = module.exports = {};
 
 var
-	local = require('./req').local,
+	local = require('../req').local,
+
 	Console = local('console-ultimate');
 
 uconsole.stream = function (options)
@@ -12,7 +13,7 @@ uconsole.stream = function (options)
 	return options.outputStream || process.stdout;
 }
 
-uconsole.console = function (options)
+uconsole.Console = function (options)
 {
 	var stream = uconsole.stream(options);
 

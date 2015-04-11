@@ -1,15 +1,16 @@
 
 
 var
-	local = require('./req').local,
-	cat = local('aux.js/array/cat');
+	local = require('../req').local,
+
+	cat     = local('aux.js/array/cat');
 	partial = local('aux.js/fn/partial');
 
 module.exports = function (repl)
 {
 	var
 		context = repl.context,
-		clog     = context.console.log.bind(context.console);
+		clog    = context.console.log.bind(context.console);
 
 	context.log = function log ()
 	{

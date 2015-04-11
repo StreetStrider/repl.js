@@ -2,8 +2,9 @@
 
 
 var
-	local = require('./req').local,
-	bold  = local('cli-color').bold;
+	local = require('../req').local,
+
+	bold = local('cli-color').bold;
 
 var
 	re = /^(function(?:[^{]*))({[\s\S]*)/;
