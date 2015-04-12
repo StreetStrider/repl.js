@@ -56,6 +56,6 @@ module.exports = nl(lines
 	line(),
 	line(bold('options'), ':'),
 	line(pad(), option('--clean', 'start repl without utilities')),
-	line(pad(), option('-h', '--help', 'show brief help')),
+	line(pad(), option('-?', '-h', '--help', 'show brief help')),
 	line(pad(), option('-v', '--version', 'show repl.js version'))
 ));

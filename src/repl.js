@@ -29,7 +29,7 @@ repl.run = function (argv)
 		],
 		alias:
 		{
-			help: [ 'h' ],
+			help: [ 'h', '?' ],
 			version: [ 'v' ],
 		}
 	});
