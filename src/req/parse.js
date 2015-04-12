@@ -17,9 +17,9 @@
 var parse = module.exports = {};
 
 
-function r (t)
+function r (t, f)
 {
-	return new RegExp(t);
+	return new RegExp(t, f);
 }
 
 function group (t)
@@ -27,11 +27,15 @@ function group (t)
 	return '(' + t + ')';
 }
 
+function whole (t)
+{
+	return '^' + t + '$';
+}
+
 var
 	tAll = '.*',
 	tId = '[a-zA-Z_][a-zA-Z_01-9]*',
-	tAlias = tId,
-	tPair = group(tAlias) + '=' + group(tAll);
+	tPair = whole(group(tId) + '=' + group(tAll));
 
 var
 	rPair = r(tPair);
@@ -109,4 +113,38 @@ parse.attempt = function (item)
 			mod:   require(item.path)
 		};
 	}
+}
+
+
+var
+	basename = require('path').basename,
+	tRash = '[/\\-.]',
+	rTrash = r(tRash, 'g');
+
+parse.canonize = function (item)
+{
+	if (item.error)
+	{
+		return item;
+	}
+	if (item.alias)
+	{
+		return {
+			alias: item.alias,
+			mod: item.mod
+		};
+	}
+	else
+	{
+		// detrash
+	}
+	return item;
+}
+
+function detrash (str)
+{
+	str = basename(str, '.js');
+	str = str.replace(rTrash, '_');
+
+	return str;
 }

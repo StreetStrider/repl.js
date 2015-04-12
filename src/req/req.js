@@ -36,6 +36,7 @@ req.process = function (argopts, console)
 
 	mods = mods.map(parse.build);
 	mods = mods.map(parse.attempt);
+	mods = mods.map(parse.canonize);
 
 	mods.forEach(function (item)
 	{
