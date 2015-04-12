@@ -38,17 +38,7 @@ req.process = function (argopts, console)
 	mods = mods.map(parse.attempt);
 	mods = mods.map(parse.canonize);
 
-	mods.forEach(function (item)
-	{
-		if (item.error)
-		{
-			console.error(item.error, item.input);
-		}
-		else
-		{
-			console.info(item.alias, typeof item.mod);
-		}
-	});
+	mods.forEach(parse.report(console));
 
 	return mods;
 }

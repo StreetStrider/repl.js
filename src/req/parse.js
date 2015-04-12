@@ -147,6 +147,7 @@ parse.canonize = function (item)
 	{
 		return {
 			alias: item.alias,
+			path: item.path,
 			mod: item.mod
 		};
 	}
@@ -167,4 +168,20 @@ function detrash (str)
 	str = str.replace(rTrash, '_');
 
 	return str;
+}
+
+
+parse.report = function (console)
+{
+	return function (item)
+	{
+		if (item.error)
+		{
+			console.error(item.error, item.input);
+		}
+		else
+		{
+			console.info(item.alias, item.path);
+		}
+	}
 }
