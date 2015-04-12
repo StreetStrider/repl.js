@@ -20,17 +20,31 @@ var
 
 repl.run = function (argv)
 {
-	argv = minimist(argv, {
+	var argopts = minimist(argv, {
 		boolean:
 		[
 			'clean',
-			'help'
+			'help',
+			'version'
 		],
 		alias:
 		{
-			help: [ 'h' ]
+			help: [ 'h' ],
+			version: [ 'v' ],
 		}
 	});
+
+	if (argopts.help)
+	{
+		process.stdout.write(require('./help'));
+		process.exit();
+	}
+
+	if (argopts.version)
+	{
+		process.stdout.write(require('../package.json').version + '\n');
+		process.exit();
+	}
 
 	return repl.start({ argopts: argv });
 }
@@ -43,12 +57,6 @@ repl.start = function (options)
 		argopts = options.argopts,
 		console = utilrepl.console.Console(options),
 		mods = req.process(argopts, console);
-
-	if (argopts.help)
-	{
-		process.stdout.write(require('./help'));
-		process.exit();
-	}
 
 	var
 		instance = std.start(options),
