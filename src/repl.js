@@ -21,6 +21,11 @@ var
 repl.run = function (argv)
 {
 	argv = minimist(argv, {
+		boolean:
+		[
+			'clean',
+			'help'
+		],
 		alias:
 		{
 			help: [ 'h' ]
@@ -49,32 +54,31 @@ repl.start = function (options)
 		instance = std.start(options),
 		context  = instance.context;
 
-	if (! argopts.clean)
-	{
-		reset(context);
-		instance.on('reset', reset);
-	}
+	reset(context);
+	instance.on('reset', reset);
 
 	return instance;
 
 	/* @todo: check reset in other versions */
 	function reset (context)
 	{
-		utilrepl.console.inRepl(instance, console);
+		if (! argopts.clean)
+		{
+			utilrepl.console.inRepl(instance, console);
 
-		utilrepl.log(instance);
+			utilrepl.log(instance);
 
-		/* @todo: return value issue */
-		/*instance.writer = */ context.dir = utilrepl.dir(instance);
+			/* @todo: return value issue */
+			/*instance.writer = */ context.dir = utilrepl.dir(instance);
 
-		utilrepl.sg(instance);
+			utilrepl.sg(instance);
 
-		utilrepl.aux(instance);
+			utilrepl.aux(instance);
 
-		context.colors = colors;
+			context.colors = colors;
+		}
 
 		req.inRepl(instance);
-
 		req.extend(instance, mods);
 	}
 }
