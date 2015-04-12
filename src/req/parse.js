@@ -79,9 +79,14 @@ function pure (item)
 }
 
 
+/* patch-from */
+parse.patch = function (patch)
+{
+	patch(module);
+}
+
 parse.attempt = function (item)
 {
-	// require
 	try
 	{
 		var m = require.resolve(item.path);

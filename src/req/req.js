@@ -9,25 +9,26 @@ req.local = function (path)
 }
 
 
-var
-	resolve = require('path').resolve,
-	paths   = require('module')._nodeModulePaths
-
 req.inRepl = function (repl)
 {
-	var
-		context = repl.context,
-		cmodule = context.module;
+	req.patch(repl.context.module);
+}
 
+var
+	resolve = require('path').resolve,
+	paths   = require('module')._nodeModulePaths;
+
+req.patch = function (module)
+{
 	/* @todo: check empty resolve */
 	// cmodule.filename = resolve('file');
-	cmodule.filename = resolve();
-	cmodule.paths    = paths(cmodule.filename);
+	module.filename = resolve();
+	module.paths    = paths(module.filename);
 }
 
 
-var
-	parse = require('./parse');
+/* patch-in */
+var parse = require('./parse'); parse.patch(req.patch);
 
 req.process = function (argopts, console)
 {
