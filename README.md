@@ -8,7 +8,7 @@ For now v1 is stable, you can install in via npm: `npm i repl.js@1`, or from `v1
 v2 (`master`) is in active development. Once it fulfills all wanted features from v1 and fixes several minor issues, it will be released at npm.
 
 ## TODO (v2)
-* [ ] require alias=module onstart
+* [x] require alias=module onstart
 * [ ] @r, @dir, @off, @log, @sg, @src
 * [ ] thenable
 * [ ] `node -p -e`
