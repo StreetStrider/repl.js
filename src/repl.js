@@ -30,7 +30,7 @@ repl.start = function (options)
 	options = extend({}, defaults, options || {});
 
 	var
-		argopts = options.argopts
+		argopts = options.argopts,
 		console = utilrepl.console.Console(options),
 		mods = req.process(argopts, console);
 

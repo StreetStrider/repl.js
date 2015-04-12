@@ -57,8 +57,8 @@ function pair (item)
 	if (match)
 	{
 		return {
-			alias: '',
-			path:  ''
+			alias: match[1],
+			path:  match[2]
 		};
 	}
 	else
@@ -87,15 +87,26 @@ parse.patch = function (patch)
 
 parse.attempt = function (item)
 {
-	try
+	if (item.error)
 	{
-		var m = require.resolve(item.path);
+		return item;
+	}
+	else try
+	{
+		var name = require.resolve(item.path);
 	}
 	catch (e)
 	{
-		console.error(e);
-		return;
+		return {
+			error: 'resolve',
+			input: item.path
+		};
 	}
-
-	console.dir(m);
+	/* else */
+	{
+		return {
+			alias: item.alias,
+			mod:   require(item.path)
+		};
+	}
 }
