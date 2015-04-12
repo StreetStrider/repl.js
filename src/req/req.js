@@ -5,7 +5,7 @@ var req = module.exports = {};
 
 req.local = function (path)
 {
-	return require(__dirname + '/../node_modules/' + path);
+	return require(__dirname + '/../../node_modules/' + path);
 }
 
 
@@ -17,7 +17,7 @@ req.inRepl = function (repl)
 {
 	var
 		context = repl.context,
-		cmodule  = context.module;
+		cmodule = context.module;
 
 	/* @todo: check empty resolve */
 	// cmodule.filename = resolve('file');
