@@ -20,7 +20,8 @@
 	"repository": { "url": "https://github.com/StreetStrider/repl.js.git", "type": "git" },
 	"bugs":       { "url": "https://github.com/StreetStrider/repl.js/issues" },
 
-	"bin": "run/repl",
+	"main": "src/repl",
+	"bin":  "run/repl",
 
 	"scripts":
 	{
