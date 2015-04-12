@@ -25,11 +25,16 @@ req.inRepl = function (repl)
 	cmodule.paths    = paths(cmodule.filename);
 }
 
+
+var
+	parse = require('./parse');
+
 req.process = function (argopts, console)
 {
-	var mods;
+	var mods = argopts._;
 
-	console.dir(argopts);
+	mods = mods.map(parse.build);
+	mods = mods.map(parse.attempt);
 
 	return mods;
 }
