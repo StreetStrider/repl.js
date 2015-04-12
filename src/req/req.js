@@ -55,5 +55,12 @@ req.process = function (argopts, console)
 
 req.extend = function (repl, mods)
 {
+	var context = repl.context;
 
+	mods.forEach(function (item)
+	{
+		if (item.error) return;
+
+		context[item.alias] = item.mod;
+	});
 }
