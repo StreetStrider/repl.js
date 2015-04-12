@@ -41,12 +41,10 @@ parse.build = function (item)
 {
 	if (~ item.indexOf('='))
 	{
-		console.log(item)
 		return pair(item);
 	}
 	else
 	{
-		console.log(2)
 		return pure(item);
 	}
 }

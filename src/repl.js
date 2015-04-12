@@ -39,7 +39,8 @@ repl.start = function (options)
 	var
 		argopts = options.argopts;
 
-	req.process(argopts, console);
+	var
+		mods = req.process(argopts, console);
 
 	if (! argopts.clean)
 	{
@@ -66,6 +67,8 @@ repl.start = function (options)
 		context.colors = colors;
 
 		req.inRepl(instance);
+
+		req.extend(instance, mods);
 	}
 }
 
