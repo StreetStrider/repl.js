@@ -30,17 +30,13 @@ repl.start = function (options)
 	options = extend({}, defaults, options || {});
 
 	var
-		console = utilrepl.console.Console(options);
+		argopts = options.argopts
+		console = utilrepl.console.Console(options),
+		mods = req.process(argopts, console);
 
 	var
 		instance = std.start(options),
 		context  = instance.context;
-
-	var
-		argopts = options.argopts;
-
-	var
-		mods = req.process(argopts, console);
 
 	if (! argopts.clean)
 	{
