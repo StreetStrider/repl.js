@@ -29,13 +29,18 @@ repl.start = function (options)
 {
 	options = extend({}, defaults, options || {});
 
-	var console = utilrepl.console.Console(options);
+	var
+		console = utilrepl.console.Console(options);
 
 	var
 		instance = std.start(options),
 		context  = instance.context;
 
-	var argopts = options.argopts;
+	var
+		argopts = options.argopts;
+
+	req.process(argopts, console);
+
 	if (! argopts.clean)
 	{
 		reset(context);

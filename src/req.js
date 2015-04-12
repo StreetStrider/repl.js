@@ -24,3 +24,17 @@ req.inRepl = function (repl)
 	cmodule.filename = resolve();
 	cmodule.paths    = paths(cmodule.filename);
 }
+
+req.process = function (argopts, console)
+{
+	var mods;
+
+	console.dir(argopts);
+
+	return mods;
+}
+
+req.extend = function (repl, mods)
+{
+
+}
