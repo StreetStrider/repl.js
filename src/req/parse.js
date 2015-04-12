@@ -177,11 +177,23 @@ parse.report = function (console)
 	{
 		if (item.error)
 		{
-			console.error(item.error, item.input);
+			console.error(err(item));
 		}
 		else
 		{
-			console.info(item.alias, item.path);
+			console.info('%s ⇐ %s', item.alias, item.path);
 		}
+	}
+}
+
+function err (item)
+{
+	switch (item.error)
+	{
+	case 'parse_pair':
+		return 'cannot parse module `'+ item.input +'`';
+
+	case 'resolve':
+		return 'cannot resolve module `'+ item.input +'`';
 	}
 }
