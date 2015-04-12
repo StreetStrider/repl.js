@@ -89,6 +89,9 @@ parse.patch = function (patch)
 	patch(module);
 }
 
+var
+	resolve = require('path').resolve;
+
 parse.attempt = function (item)
 {
 	if (item.error)
@@ -97,20 +100,34 @@ parse.attempt = function (item)
 	}
 	else try
 	{
-		var name = require.resolve(item.path);
+		var
+			path = item.path,
+			name = require.resolve(path);
+	}
+	catch (e)
+	{
+		var
+			path = resolve(item.path);
+
+	try
+	{
+		var name = require.resolve(path);
 	}
 	catch (e)
 	{
 		return {
 			error: 'resolve',
-			input: item.path
+			input: path
 		};
+	}
+
 	}
 	/* else */
 	{
 		return {
 			alias: item.alias,
-			mod:   require(item.path)
+			path:  path,
+			mod:   require(path)
 		};
 	}
 }
@@ -118,8 +135,7 @@ parse.attempt = function (item)
 
 var
 	basename = require('path').basename,
-	tRash = '[/\\-.]',
-	rTrash = r(tRash, 'g');
+	rTrash = r('[/\\-.]', 'g');
 
 parse.canonize = function (item)
 {
@@ -136,7 +152,11 @@ parse.canonize = function (item)
 	}
 	else
 	{
-		// detrash
+		return {
+			alias: detrash(item.path),
+			path: item.path,
+			mod: item.mod
+		};
 	}
 	return item;
 }
