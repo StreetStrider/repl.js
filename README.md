@@ -20,7 +20,7 @@ In REPL some features are loaded automatically:
 * `dir` function for navigating objects.
 
 ### clean environment
-If you do not want anything to be loaded into REPL, pass `--clean` option.
+If you do not want utilities to be loaded into REPL, pass `--clean` option.
 ```sh
 $ repl.js --clean
 ```

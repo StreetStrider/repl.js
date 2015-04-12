@@ -20,7 +20,12 @@ var
 
 repl.run = function (argv)
 {
-	argv = minimist(argv);
+	argv = minimist(argv, {
+		alias:
+		{
+			help: [ 'h' ]
+		}
+	});
 
 	return repl.start({ argopts: argv });
 }
@@ -33,6 +38,12 @@ repl.start = function (options)
 		argopts = options.argopts,
 		console = utilrepl.console.Console(options),
 		mods = req.process(argopts, console);
+
+	if (argopts.help)
+	{
+		process.stdout.write(require('./help'));
+		process.exit();
+	}
 
 	var
 		instance = std.start(options),
