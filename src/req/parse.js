@@ -102,6 +102,7 @@ parse.attempt = function (item)
 	{
 		var
 			path = item.path,
+			orig = path,
 			name = require.resolve(path);
 	}
 	catch (e)
@@ -117,7 +118,7 @@ parse.attempt = function (item)
 	{
 		return {
 			error: 'resolve',
-			input: path
+			input: orig
 		};
 	}
 
