@@ -127,6 +127,7 @@ parse.attempt = function (item)
 	{
 		return {
 			alias: item.alias,
+			orig:  orig,
 			path:  path,
 			mod:   require(path)
 		};
@@ -152,6 +153,7 @@ parse.canonize = function (item)
 	{
 		return {
 			alias: detrash(item.path),
+			orig: item.orig,
 			path: item.path,
 			mod: item.mod
 		};
@@ -168,6 +170,9 @@ function detrash (str)
 }
 
 
+var
+	format = require('util').format;
+
 parse.report = function (console)
 {
 	return function (item)
@@ -178,7 +183,16 @@ parse.report = function (console)
 		}
 		else
 		{
-			console.info('%s ⇐ %s', item.alias, item.path);
+			var what;
+			if (item.orig === item.path)
+			{
+				what = item.orig;
+			}
+			else
+			{
+				what = format('%s (%s)', item.orig, item.path);
+			}
+			console.info('%s ⇐ %s', item.alias, what);
 		}
 	}
 }
@@ -188,9 +202,9 @@ function err (item)
 	switch (item.error)
 	{
 	case 'parse_pair':
-		return 'cannot parse module `'+ item.input +'`';
+		return format('cannot parse module `%s`', item.input);
 
 	case 'resolve':
-		return 'cannot resolve module `'+ item.input +'`';
+		return format('cannot resolve module `%s`', item.input);
 	}
 }
