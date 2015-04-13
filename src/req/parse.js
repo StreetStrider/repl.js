@@ -145,11 +145,7 @@ parse.canonize = function (item)
 	}
 	if (item.alias)
 	{
-		return {
-			alias: item.alias,
-			path: item.path,
-			mod: item.mod
-		};
+		return item;
 	}
 	else
 	{

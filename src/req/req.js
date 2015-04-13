@@ -30,11 +30,13 @@ req.patch = function (module)
 /* patch-in */
 var parse = require('./parse'); parse.patch(req.patch);
 
-req.process = function (argopts, console)
+req.parse = function (seq)
 {
-	var mods = argopts._;
+	return seq.map(parse.build);
+}
 
-	mods = mods.map(parse.build);
+req.process = function (mods, console)
+{
 	mods = mods.map(parse.attempt);
 	mods = mods.map(parse.canonize);
 

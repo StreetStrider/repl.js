@@ -46,7 +46,9 @@ repl.run = function (argv)
 		process.exit();
 	}
 
-	return repl.start({ argopts: argopts });
+	var mods = req.parse(argopts._);
+
+	return repl.start({ argopts: argopts, mods: mods });
 }
 
 repl.start = function (options)
@@ -56,7 +58,7 @@ repl.start = function (options)
 	var
 		argopts = options.argopts,
 		console = utilrepl.console.Console(options),
-		mods = req.process(argopts, console);
+		mods    = req.process(options.mods, console);
 
 	var
 		instance = std.start(options),
@@ -96,5 +98,6 @@ var defaults =
 	prompt: 'js > ',
 	ignoreUndefined: true,
 
-	argopts: {}
+	argopts: {},
+	mods: []
 }
