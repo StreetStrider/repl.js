@@ -46,7 +46,7 @@ repl.run = function (argv)
 		process.exit();
 	}
 
-	return repl.start({ argopts: argv });
+	return repl.start({ argopts: argopts });
 }
 
 repl.start = function (options)
