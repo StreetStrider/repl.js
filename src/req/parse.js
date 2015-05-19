@@ -102,17 +102,17 @@ parse.attempt = function (item)
 	{
 		var
 			path = item.path,
-			orig = path,
-			name = require.resolve(path);
+			orig = path;
+
+		path = require.resolve(path);
 	}
 	catch (e)
 	{
-		var
-			path = resolve(item.path);
+		path = resolve(item.path);
 
 	try
 	{
-		var name = require.resolve(path);
+		path = require.resolve(path);
 	}
 	catch (e)
 	{
@@ -152,7 +152,7 @@ parse.canonize = function (item)
 	else
 	{
 		return {
-			alias: detrash(item.path),
+			alias: detrash(item.orig),
 			orig: item.orig,
 			path: item.path,
 			mod: item.mod
