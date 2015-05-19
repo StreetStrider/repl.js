@@ -92,13 +92,9 @@ parse.patch = function (patch)
 var
 	resolve = require('path').resolve;
 
-parse.attempt = function (item)
+parse.attempt = passerror(function (item)
 {
-	if (item.error)
-	{
-		return item;
-	}
-	else try
+	try
 	{
 		var
 			path = item.path,
@@ -132,19 +128,15 @@ parse.attempt = function (item)
 			mod:   require(path)
 		};
 	}
-}
+})
 
 
 var
 	basename = require('path').basename,
 	rTrash = r('[/\\-.]', 'g');
 
-parse.canonize = function (item)
+parse.canonize = passerror(function (item)
 {
-	if (item.error)
-	{
-		return item;
-	}
 	if (item.alias)
 	{
 		return item;
@@ -159,7 +151,7 @@ parse.canonize = function (item)
 		};
 	}
 	return item;
-}
+})
 
 function detrash (str)
 {
@@ -206,5 +198,20 @@ function err (item)
 
 	case 'resolve':
 		return format('cannot resolve module `%s`', item.input);
+	}
+}
+
+function passerror (fn)
+{
+	return function (item)
+	{
+		if (item.error)
+		{
+			return item;
+		}
+		else
+		{
+			return fn(item);
+		}
 	}
 }
