@@ -13,8 +13,7 @@ module.exports = function (repl)
 {
 	var
 		context = repl.context,
-		/* @todo: maybe log -> stream.write */
-		log = context.console.log;
+		console = context.console;
 
 	var sg = context.sg = context.signature = function signature (fn, isBodyToo)
 	{
@@ -34,7 +33,10 @@ module.exports = function (repl)
 				out = bold(match[1].trim());
 			}
 
-			log(out);
+			/* @todo: unbind from group */
+			console.group();
+			console.writer.writeln('stdout', out);
+			console.group.end();
 		}
 	}
 
