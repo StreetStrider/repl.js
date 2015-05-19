@@ -156,6 +156,7 @@ parse.canonize = passerror(function (item)
 function detrash (str)
 {
 	str = basename(str, '.js');
+	str = basename(str, '.json');
 	str = str.replace(rTrash, '_');
 
 	return str;
