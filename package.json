@@ -3,7 +3,7 @@
 	"version": "2.0.0-pre",
 
 	"description": "Node.js interactive REPL with promise support & CLI module requiring",
-	"author": "StreetStrider <teamfortresslife@gmail.com>",
+	"author":  "StreetStrider <teamfortresslife@gmail.com>",
 	"license": "MIT",
 
 	"keywords":
@@ -11,8 +11,10 @@
 		"repl", "cli", "shell",
 		"interactive",
 		"repl.js",
-		"promise", "deferred", "bluebird",
+		"promise", "deferred", "bluebird", "async",
 		"require", "module", "resolve",
+		"functional",
+		"util",
 		"node"
 	],
 
@@ -30,7 +32,7 @@
 
 	"dependencies":
 	{
-		"aux.js": "~2",
+		"aux.js": "^2",
 		"console-ultimate": "^2",
 		"cli-color": "^1",
 		"minimist": "^1.1.1"
