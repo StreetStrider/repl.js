@@ -28,6 +28,7 @@ req.patch = function (module)
 
 
 /* patch-in */
+/* patches target MODULE environment for proper requiring modules on-fly */
 var parse = require('./parse'); parse.patch(req.patch);
 
 req.parse = function (seq)

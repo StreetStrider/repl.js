@@ -84,6 +84,7 @@ function pure (item)
 
 
 /* patch-from */
+/* patches current MODULE environment for proper requiring modules on-fly */
 parse.patch = function (patch)
 {
 	patch(module);
