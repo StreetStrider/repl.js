@@ -15,6 +15,7 @@ var
 	minimist = req.local('minimist');
 
 var
+	evaler = require('./evaler'),
 	utilrepl = require('./utilrepl');
 
 
@@ -53,12 +54,21 @@ repl.run = function (argv)
 
 repl.start = function (options)
 {
-	options = extend({}, defaults, options || {});
+	options || (options = {});
+
+	options = extend(
+		{},
+		defaults,
+		options
+	);
 
 	var
 		argopts = options.argopts,
 		console = utilrepl.console.Console(options),
 		mods    = req.process(options.mods, console);
+
+	/* @todo override? */
+	options.eval = evaler(options, console)
 
 	var
 		instance = std.start(options),
