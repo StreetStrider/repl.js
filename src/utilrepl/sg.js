@@ -15,6 +15,11 @@ module.exports = function (repl, console)
 
 	var sg = context.sg = context.signature = function signature (fn, isBodyToo)
 	{
+		if (typeof fn !== 'function')
+		{
+			return notAFunction();
+		}
+
 		var
 			view  = fn.toString(),
 			match = re.exec(view),
@@ -35,10 +40,19 @@ module.exports = function (repl, console)
 			console.writer.writeln('stdout', out);
 			console.group.end();
 		}
+		else
+		{
+			notAFunction();
+		}
 	}
 
 	context.src = context.sourceCode = function sourceCode (fn)
 	{
 		sg(fn, true);
+	}
+
+	function notAFunction ()
+	{
+		console.error('Does not look like a function.');
 	}
 }
