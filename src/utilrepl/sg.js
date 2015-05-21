@@ -9,11 +9,9 @@ var
 var
 	re = /^(function(?:[^{]*))({[\s\S]*)/;
 
-module.exports = function (repl)
+module.exports = function (repl, console)
 {
-	var
-		context = repl.context,
-		console = context.console;
+	var context = repl.context;
 
 	var sg = context.sg = context.signature = function signature (fn, isBodyToo)
 	{
@@ -33,7 +31,6 @@ module.exports = function (repl)
 				out = bold(match[1].trim());
 			}
 
-			/* @todo: unbind from group */
 			console.group();
 			console.writer.writeln('stdout', out);
 			console.group.end();

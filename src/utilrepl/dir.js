@@ -1,11 +1,11 @@
 
 
 
-module.exports = function (repl)
+module.exports = function (repl, console)
 {
 	var
 		context = repl.context,
-		cdir    = context.console.dir;
+		dir     = console.dir;
 
 	function dir (object)
 	{

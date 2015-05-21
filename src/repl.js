@@ -76,12 +76,12 @@ repl.start = function (options)
 		{
 			utilrepl.console.inRepl(instance, console);
 
-			utilrepl.log(instance);
+			utilrepl.log(instance, console);
 
 			/* @todo: return value issue */
-			/*instance.writer = */ context.dir = utilrepl.dir(instance);
+			/*instance.writer = */ context.dir = utilrepl.dir(instance, console);
 
-			utilrepl.sg(instance);
+			utilrepl.sg(instance, console);
 
 			utilrepl.aux(instance);
 

@@ -6,11 +6,11 @@ var
 	cat     = local('aux.js/array/cat');
 	partial = local('aux.js/fn/partial');
 
-module.exports = function (repl)
+module.exports = function (repl, console)
 {
 	var
 		context = repl.context,
-		clog    = context.console.log.bind(context.console);
+		clog    = console.log;
 
 	context.log = function log ()
 	{
