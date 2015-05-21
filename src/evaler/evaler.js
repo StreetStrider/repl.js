@@ -2,47 +2,49 @@
 
 
 var
-	vm = require('vm');
+	vm = require('vm'),
+	Promise = require('promise');
 
 module.exports = function Evaler (options, console)
 {
 	var vm_evaler;
 	var evaler;
-	var result;
+
+	var noDisplay = { displayErrors: false };
 
 	if (options.useGlobal)
 	{
-		console.info('global');
 		vm_evaler = function (code)
 		{
-			return vm.runInThisContext(code);
+			return vm.runInThisContext(code, noDisplay);
 		}
 	}
 	else
 	{
-		console.info('non global');
 		vm_evaler = function (code, context)
 		{
-			return vm.runInContext(code, context);
+			return vm.runInContext(code, context, noDisplay);
 		}
 	}
 
-	evaler = function (code, context, filename, callback)
+	evaler = function (code, context, __filename, callback)
 	{
-		try
+		new Promise(function (rs, rj)
 		{
-			var result = vm_evaler(code, context);
+			rs(vm_evaler(code, context));
+		})
+		.then(ok, error);
+
+		function ok (result)
+		{
+			callback(null, result);
 		}
-		catch (e)
+		function error (error)
 		{
-			return callback(e);
-		}
-		{
-			return callback(null, result);
+			console.trace(error);
+			callback(null);
 		}
 	}
 
 	return evaler;
 }
-
-// { displayErrors: false }

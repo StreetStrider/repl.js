@@ -35,6 +35,7 @@
 		"aux.js": "^2",
 		"console-ultimate": "^2",
 		"cli-color": "^1",
-		"minimist": "^1.1.1"
+		"minimist": "^1.1.1",
+		"promise": "^7"
 	}
 }
