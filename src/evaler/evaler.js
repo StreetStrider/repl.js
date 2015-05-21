@@ -7,31 +7,44 @@ var
 
 module.exports = function Evaler (options, console)
 {
-	var vm_evaler;
-	var evaler;
+	var
+		vmEvaler,
+		noDisplay = { displayErrors: false };
 
-	var noDisplay = { displayErrors: false };
 
 	if (options.useGlobal)
 	{
-		vm_evaler = function (code)
+		vmEvaler = function (script)
 		{
-			return vm.runInThisContext(code, noDisplay);
+			return script.runInThisContext(noDisplay);
 		}
 	}
 	else
 	{
-		vm_evaler = function (code, context)
+		vmEvaler = function (script, context)
 		{
-			return vm.runInContext(code, context, noDisplay);
+			return script.runInContext(context, noDisplay);
 		}
 	}
 
-	evaler = function (code, context, __filename, callback)
+	return function (code, context, filename, callback)
 	{
+		try
+		{
+			var script = new vm.Script(code, {
+				filename: filename,
+				displayErrors: false
+			});
+		}
+		catch (e)
+		{
+			console.error(e);
+			return callback();
+		}
+
 		new Promise(function (rs, rj)
 		{
-			rs(vm_evaler(code, context));
+			rs(vmEvaler(script, context));
 		})
 		.then(ok, error);
 
@@ -42,7 +55,7 @@ module.exports = function Evaler (options, console)
 		function error (error)
 		{
 			console.trace(error);
-			callback(null);
+			callback();
 		}
 	}
 
