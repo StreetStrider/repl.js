@@ -2,6 +2,7 @@
 
 
 var
+	specialColor = require('util').inspect.styles.special,
 	vm = require('vm'),
 	Promise = require('promise');
 
@@ -68,31 +69,25 @@ module.exports = function Evaler (options, console)
 
 		var
 			slowIndicator,
-			isSlow;
-
-		var util = require('util');
-		var color = console.colors[util.inspect.styles.special];
+			isSlow,
+			clc = console.colors,
+			color = clc[specialColor],
+			erase = clc.move.up(1) + clc.erase.line;
 
 		function enterPromise ()
 		{
-			//console.info('enter promise');
 			slowIndicator = setTimeout(function ()
 			{
 				isSlow = true;
-				//console.warn('it isSlow');
-				console.writer.writeln('stdout', color('[Promise]'));
+				console.writer.writeln('stdout', color(' [Promise…]'));
 			}, slowThrs);
 		}
 		function leavePromise ()
 		{
 			clearTimeout(slowIndicator);
-			//console.info('leave promise');
 			if (isSlow)
 			{
-				//console.warn('was isSlow = true');
-				//console.warn('_ must clear here');
-				console.writer.write('stdout', console.colors.move.up(1));
-				console.writer.write('stdout', console.colors.erase.line);
+				console.writer.write('stdout', erase);
 			}
 		}
 	}
