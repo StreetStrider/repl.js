@@ -70,6 +70,7 @@ module.exports = function Evaler (options, console)
 		var
 			slowIndicator,
 			isSlow,
+			isIntercepted,
 			clc = console.colors,
 			color = clc[specialColor],
 			erase = clc.move.up(1) + clc.erase.line;
@@ -80,6 +81,7 @@ module.exports = function Evaler (options, console)
 			{
 				isSlow = true;
 				console.writer.writeln('stdout', color(' [Promise…]'));
+				console.writer.transform(interceptor);
 			}, slowThrs);
 		}
 		function leavePromise ()
@@ -87,8 +89,23 @@ module.exports = function Evaler (options, console)
 			clearTimeout(slowIndicator);
 			if (isSlow)
 			{
-				console.writer.write('stdout', erase);
+				console.writer.transform.pop();
+
+				if (! isIntercepted)
+				{
+					console.writer.write('stdout', erase);
+				}
+				else
+				{
+					console.writer.writeln('stdout', color(' [Promise resolved]:'));
+				}
 			}
+		}
+
+		function interceptor (_)
+		{
+			isIntercepted = true;
+			return _;
 		}
 	}
 
