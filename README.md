@@ -33,7 +33,7 @@ v2 (`master`) is in active development. Once it fulfills all wanted features fro
 In progress:
 * [x] require alias=module onstart
 * [ ] @r, @dir, @off, @log, @sg, @src
-* [ ] thenable
+* [x] thenable
 * [ ] `node -p -e`
 * [ ] `node <script.js>` + interactivity by default (run module in repl's context)
 * [ ] `node -v`
