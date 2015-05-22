@@ -38,7 +38,11 @@ module.exports = function Evaler (options, console)
 		}
 		catch (e)
 		{
-			console.error(e);
+			/* don't know what actually I did */
+			if (code !== '.scope')
+			{
+				console.error(e);
+			}
 			return callback();
 		}
 
