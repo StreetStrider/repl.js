@@ -96,6 +96,8 @@ repl.start = function (options)
 			utilrepl.aux(instance);
 
 			context.colors = colors;
+
+			context.Promise = require('promise');
 		}
 
 		req.inRepl(instance);
