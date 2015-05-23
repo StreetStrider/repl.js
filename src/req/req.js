@@ -33,7 +33,9 @@ var parse = require('./parse'); parse.patch(req.patch);
 
 req.parse = function (seq)
 {
-	return seq.map(parse.build);
+	return seq
+	.map(String)
+	.map(parse.build);
 }
 
 req.process = function (mods, console)
