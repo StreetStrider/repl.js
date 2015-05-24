@@ -14,7 +14,7 @@
 		"promise", "deferred", "async",
 		"require", "module", "resolve",
 		"functional",
-		"util",
+		"util", "inspect", "dir", "log", "debug",
 		"node"
 	],
 
