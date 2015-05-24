@@ -15,6 +15,7 @@ var
 	minimist = req.local('minimist');
 
 var
+	manifest = require('../package.json'),
 	evaler = require('./evaler'),
 	utilrepl = require('./utilrepl');
 
@@ -43,7 +44,7 @@ repl.run = function (argv)
 
 	if (argopts.version)
 	{
-		process.stdout.write(require('../package.json').version + '\n');
+		process.stdout.write(manifest.version + '\n');
 		process.exit();
 	}
 
@@ -98,6 +99,8 @@ repl.start = function (options)
 			context.colors = colors;
 
 			context.Promise = require('promise');
+
+			context.manifest = manifest;
 		}
 
 		req.inRepl(instance);
