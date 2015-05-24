@@ -10,14 +10,22 @@ Specify modules (with optional aliases) you want to be loaded into REPL onstart.
 $ repl.js path lodash Promise=bluebird ./local_file.js file=./another_local_file.js
 ```
 
+### promises
+When evaling returns promise, it will not be outputted in «raw view» (like `{ then: … }`), instead REPL will await for it fulfilling.
+
+### robust require
+All modules are resolved relatively to workdir which REPL was started, and not relatively to REPL source files. So you can start repl from your project's directory and retrieve modules you need with proper versions.
+
 ### useful utils
 In REPL some features are loaded automatically:
 * Colored console via `console` ([console-ultimate](https://www.npmjs.com/package/console-ultimate)).
+  * Take a moment to look through console-ultimate's features. It has support for hi-res timers, better stack traces, tables, grouping and neat coloring by default.
 * Colors via `colors` ([cli-color](https://www.npmjs.com/package/cli-color)).
 * Common-use utilities from aux.js, functional stuff ([aux.js](https://www.npmjs.org/package/aux.js)).
-* Partially-applicated `log` function via `plog`.
+  * Many of functions are inserted directly in `global`, use `dir()` to inspect them.
+* Partially-applicated `log` function via `plog`. (will be moved under `console-ultimate` in future)
 * Function's signatures and source code via `signature` (alias `sg`) and `sourceCode` (alias `src`).
-* `dir` function for navigating objects.
+* `dir` function for navigating objects (enums, not-enums, own, from prototype chain).
 
 ### clean environment
 If you do not want utilities to be loaded into REPL, pass `--clean` option.
@@ -25,18 +33,13 @@ If you do not want utilities to be loaded into REPL, pass `--clean` option.
 $ repl.js --clean
 ```
 
-## stable channel
-For now v1 is stable, you can install in via npm: `npm i repl.js`, or from `v1` git-branch.
-v2 (`master`) is in active development. Once it fulfills all wanted features from v1 and fixes several minor issues, it will be released at npm.
-
 ## todo (v2)
-In progress:
-* [x] require alias=module onstart
-* [ ] @r, @dir, @off, @log, @sg, @src
-* [x] thenable
-* [ ] `node -p -e`
+For now `v2` is stable and installed by default. Some features are still in progress:
+* [ ] per-expressing directives to modify eval process @r, @dir, @off, @log, @sg, @src
+* [ ] `node -p -e` for executing script and enter interactive mode
 * [ ] `node <script.js>` + interactivity by default (run module in repl's context)
-* [ ] `node -v`
+* [x] require alias=module onstart
+* [x] thenable
 
 ## license
 MIT.
