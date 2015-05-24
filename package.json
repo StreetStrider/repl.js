@@ -11,7 +11,7 @@
 		"repl", "cli", "shell",
 		"interactive",
 		"repl.js",
-		"promise", "deferred", "bluebird", "async",
+		"promise", "deferred", "async",
 		"require", "module", "resolve",
 		"functional",
 		"util",
