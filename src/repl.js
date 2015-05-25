@@ -75,6 +75,8 @@ repl.start = function (options)
 		instance = std.start(options),
 		context  = instance.context;
 
+	instance.writer = utilrepl.dir.writer(console);
+
 	reset(context);
 	instance.on('reset', reset);
 
@@ -89,8 +91,7 @@ repl.start = function (options)
 
 			utilrepl.log(instance, console);
 
-			/* @todo: return value issue */
-			/*instance.writer = */ context.dir = utilrepl.dir(instance, console);
+			context.dir = utilrepl.dir.dir(instance, console);
 
 			utilrepl.sg(instance, console);
 

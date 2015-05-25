@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "2.0.0",
+	"version": "2.0.1-pre",
 
 	"description": "Node.js interactive REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
@@ -33,7 +33,7 @@
 	"dependencies":
 	{
 		"aux.js": "^2",
-		"console-ultimate": "^2",
+		"console-ultimate": "^2.5",
 		"cli-color": "^1",
 		"minimist": "^1.1.1",
 		"promise": "^7"

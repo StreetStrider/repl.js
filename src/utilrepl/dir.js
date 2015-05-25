@@ -1,7 +1,7 @@
 
 
 
-module.exports = function (repl, console)
+exports.dir = function (repl, console)
 {
 	var
 		context = repl.context,
@@ -15,10 +15,17 @@ module.exports = function (repl, console)
 		}
 
 		_dir(object, 0);
-
-		/* @todo: return value issue */
-		// return 'LOL'
 	}
 
 	return dir;
+}
+
+exports.writer = function (console)
+{
+	var retrieve = console.dir.retrieve;
+
+	return function writer (object)
+	{
+		return retrieve(object, 1);
+	}
 }
