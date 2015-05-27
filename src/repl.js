@@ -61,17 +61,6 @@ repl.run = function (argv)
 		mods = req.parse(argopts._),
 		replopts = { argopts: argopts, mods: mods };
 
-	if (argopts.eval)
-	{
-		var evalstring = argopts.eval;
-		replopts.instantRun = { eval: evalstring };
-
-		if (argopts.print)
-		{
-			replopts.instantRun.print = true;
-		}
-	}
-
 	return repl.start(replopts);
 }
 
@@ -102,10 +91,10 @@ repl.start = function (options)
 	reset(context);
 	instance.on('reset', reset);
 
-	if (options.instantRun)
+	if (options.argopts.eval || options.argopts.file)
 	{
 		var instarun = require('./evaler/instarun');
-		instarun(instance, console, options.instantRun);
+		instarun(instance, console, options.argopts);
 	}
 
 	return instance;

@@ -5,11 +5,11 @@ var
 	local = require('../req').local,
 	clc   = local('cli-color');
 
-module.exports = function (instance, console, instantRun)
+module.exports = function (instance, console, argopts)
 {
-	if (instantRun.eval)
+	if (argopts.eval)
 	{
-		evalString(instance, console, instantRun.eval);
+		evalString(instance, console, argopts.eval);
 	}
 
 	function evalString (instance, console, string)
@@ -22,7 +22,7 @@ module.exports = function (instance, console, instantRun)
 
 	function done (_, value)
 	{
-		if (instantRun.print)
+		if (argopts.print)
 		{
 			clearBeforeOutput();
 			output(value);
