@@ -3,9 +3,7 @@
 
 var
 	local = require('../req').local,
-
-	clc   = local('cli-color'),
-	erase = /*clc.move.up(1) +*/ clc.erase.line;
+	clc   = local('cli-color');
 
 module.exports = function (instance, console, instantRun)
 {
@@ -26,18 +24,25 @@ module.exports = function (instance, console, instantRun)
 	{
 		if (instantRun.print)
 		{
-			//clear();
-			writeln(value);
+			clearBeforeOutput();
+			output(value);
 		}
 		instance.displayPrompt();
 	}
 
-	function clear ()
+	function clearBeforeOutput ()
 	{
-		console.writer.write('stdout', erase);
+		_write(clc.erase.line);
+		_write('\n');
+		_write(clc.move.up(1));
 	}
-	function writeln (value)
+
+	function output (value)
 	{
 		console.writer.writeln('stdout', instance.writer(value));
+	}
+	function _write (string)
+	{
+		console.writer.write('stdout', string);
 	}
 }
