@@ -34,11 +34,13 @@ repl.run = function (argv)
 		],
 		string:
 		[
-			'eval'
+			'eval',
+			'file'
 		],
 		alias:
 		{
 			eval:  [ 'e' ],
+			file:  [ 'f' ],
 			print: [ 'p' ],
 			help:  [ 'h', '?' ],
 			version: [ 'v' ],

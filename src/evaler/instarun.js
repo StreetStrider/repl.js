@@ -3,16 +3,26 @@
 
 var
 	local = require('../req').local,
-	clc   = local('cli-color');
+	clc   = local('cli-color'),
+
+	c = local('aux.js/fn/constrain'),
+	read = c(require('fs').readFileSync, c, 'utf-8');
 
 module.exports = function (instance, console, argopts)
 {
 	if (argopts.eval)
 	{
-		evalString(instance, console, argopts.eval);
+		evalString(argopts.eval);
+	}
+	else if (argopts.file)
+	{
+		var content = read(argopts.file);
+
+		clearBeforeOutput();
+		evalString(content);
 	}
 
-	function evalString (instance, console, string)
+	function evalString (string)
 	{
 		/* instance.clearLine(); */
 		// clear();
