@@ -2,9 +2,15 @@
 
 
 var
-	specialColor = require('util').inspect.styles.special,
 	vm = require('vm'),
-	Promise = require('promise');
+
+	local = require('../req').local,
+	Promise = local('promise'),
+
+	specialColor = require('util').inspect.styles.special,
+	clc = local('cli-color'),
+	color = clc[specialColor],
+	erase = clc.move.up(1) + clc.erase.line;
 
 module.exports = function Evaler (options, console)
 {
@@ -70,10 +76,7 @@ module.exports = function Evaler (options, console)
 		var
 			slowIndicator,
 			isSlow,
-			isIntercepted,
-			clc = console.colors,
-			color = clc[specialColor],
-			erase = clc.move.up(1) + clc.erase.line;
+			isIntercepted;
 
 		function enterPromise ()
 		{

@@ -29,8 +29,13 @@ repl.run = function (argv)
 			'help',
 			'version'
 		],
+		string:
+		[
+			'eval'
+		],
 		alias:
 		{
+			eval: [ 'e' ],
 			help: [ 'h', '?' ],
 			version: [ 'v' ],
 		}
@@ -48,9 +53,17 @@ repl.run = function (argv)
 		process.exit();
 	}
 
-	var mods = req.parse(argopts._);
+	var
+		mods = req.parse(argopts._),
+		replopts = { argopts: argopts, mods: mods };
 
-	return repl.start({ argopts: argopts, mods: mods });
+	if (argopts.eval)
+	{
+		var evalstring = argopts.eval;
+		replopts.instantRun = { eval: evalstring };
+	}
+
+	return repl.start(replopts);
 }
 
 repl.start = function (options)
@@ -79,6 +92,12 @@ repl.start = function (options)
 
 	reset(context);
 	instance.on('reset', reset);
+
+	if (options.instantRun)
+	{
+		var instarun = require('./evaler/instarun');
+		instarun(instance, console, options.instantRun);
+	}
 
 	return instance;
 
