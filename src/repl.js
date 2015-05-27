@@ -26,8 +26,11 @@ repl.run = function (argv)
 		boolean:
 		[
 			'clean',
+
+			'print',
+
 			'help',
-			'version'
+			'version',
 		],
 		string:
 		[
@@ -35,8 +38,9 @@ repl.run = function (argv)
 		],
 		alias:
 		{
-			eval: [ 'e' ],
-			help: [ 'h', '?' ],
+			eval:  [ 'e' ],
+			print: [ 'p' ],
+			help:  [ 'h', '?' ],
 			version: [ 'v' ],
 		}
 	});
@@ -61,6 +65,11 @@ repl.run = function (argv)
 	{
 		var evalstring = argopts.eval;
 		replopts.instantRun = { eval: evalstring };
+
+		if (argopts.print)
+		{
+			replopts.instantRun.print = true;
+		}
 	}
 
 	return repl.start(replopts);
