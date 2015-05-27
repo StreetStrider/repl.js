@@ -8,17 +8,8 @@ var
 
 module.exports = function (repl, console)
 {
-	var
-		context = repl.context,
-		clog    = console.log;
+	var context = repl.context;
 
-	context.log = function log ()
-	{
-		return clog.apply(null, arguments);
-	}
-
-	context.plog = function partialLog ()
-	{
-		return partial.apply(null, cat([ clog ], arguments));
-	}
+	context.log = console.log;
+	context.logpart = context.plog = console.log.part;
 }

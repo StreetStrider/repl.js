@@ -23,7 +23,7 @@ In REPL some features are loaded automatically:
 * Colors via `colors` ([cli-color](https://www.npmjs.com/package/cli-color)).
 * Common-use utilities from aux.js, functional stuff ([aux.js](https://www.npmjs.org/package/aux.js)).
   * Many of functions are inserted directly in `global`, use `dir()` to inspect them.
-* Partially-applicated `log` function via `plog`. (will be moved under `console-ultimate` in future)
+* Partially-applicated `log` function via `logpart`.
 * Function's signatures and source code via `signature` (alias `sg`) and `sourceCode` (alias `src`).
 * `dir` function for navigating objects (enums, not-enums, own, from prototype chain).
 
