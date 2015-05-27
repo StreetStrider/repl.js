@@ -50,7 +50,7 @@ function option (opts, text)
 module.exports = nl(lines
 (
 	line(header('repl.js')),
-	line(' — Node.js interactive REPL with promise support & CLI module requiring.'),
+	line(' — Node.js REPL with promise support & CLI module requiring.'),
 	line(),
 	line('repl.js [options] [module, ...]'),
 	line(),

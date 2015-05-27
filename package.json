@@ -2,14 +2,14 @@
 	"name"   : "repl.js",
 	"version": "2.1.0",
 
-	"description": "Node.js interactive REPL with promise support & CLI module requiring",
+	"description": "Node.js REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
 	"license": "MIT",
 
 	"keywords":
 	[
 		"repl", "cli", "shell",
-		"interactive",
+		"interactive", "exec", "execute",
 		"repl.js",
 		"promise", "deferred", "async",
 		"require", "module", "resolve",

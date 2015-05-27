@@ -1,5 +1,5 @@
 # repl.js
-> Node.js interactive REPL with promise support & CLI module requiring.
+> Node.js REPL with promise support & CLI module requiring.
 
 This module is a drop-in replacement for node std `repl`. Can be used as shell & via API.
 
@@ -7,11 +7,21 @@ This module is a drop-in replacement for node std `repl`. Can be used as shell &
 ### on-start requiring
 Specify modules (with optional aliases) you want to be loaded into REPL onstart.
 ```sh
-$ repl.js path lodash Promise=bluebird ./local_file.js file=./another_local_file.js
+$ repl.js path lodash Promise=bluebird ./file.js file=./other_file.js
+```
+
+### execute & enter interactive
+Supply script of filename to execute. After executing REPL will be started with script's results.
+```sh
+# execute script and inspect in results in interactive mode
+$ repl.js -e 'var x = 1;'
+
+# execute file
+$ repl.js -f script.js
 ```
 
 ### promises
-When evaling returns promise, it will not be outputted in «raw view» (like `{ then: … }`), instead REPL will await for it fulfilling.
+When evaling returns promise, it will not be outputted in «raw view» (like `{ then: … }`), instead REPL will await for its fulfilling.
 
 ### robust require
 All modules are resolved relatively to workdir which REPL was started, and not relatively to REPL source files. So you can start repl from your project's directory and retrieve modules you need with proper versions.
