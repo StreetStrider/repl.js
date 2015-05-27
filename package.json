@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "2.0.1-pre",
+	"version": "2.1.0",
 
 	"description": "Node.js interactive REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",

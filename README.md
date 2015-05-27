@@ -36,8 +36,9 @@ $ repl.js --clean
 ## todo (v2)
 For now `v2` is stable and installed by default. Some features are still in progress:
 * [ ] per-expressing directives to modify eval process @r, @dir, @off, @log, @sg, @src
-* [ ] `node -p -e` for executing script and enter interactive mode
-* [ ] `node <script.js>` + interactivity by default (run module in repl's context)
+* [x] `node -p -e <"expr">` + enter interactive mode
+* [x] `node -p -f <script.js>` + enter interactive mode
+* [ ] teach stdin?
 * [x] require alias=module onstart
 * [x] thenable
 
