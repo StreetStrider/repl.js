@@ -17,6 +17,7 @@ module.exports = function (instance, console, argopts)
 	else if (argopts.file)
 	{
 		var content = read(argopts.file);
+		/* @todo setup proper `require` */
 
 		clearBeforeOutput();
 		evalString(content);
