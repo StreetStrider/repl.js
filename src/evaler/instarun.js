@@ -12,18 +12,20 @@ module.exports = function (instance, console, argopts)
 {
 	if (argopts.eval)
 	{
-		evalString(argopts.eval);
+		evalString(argopts.eval, done);
 	}
 	else if (argopts.file)
 	{
 		var content = read(argopts.file);
 		/* @todo setup proper `require` */
 
+		// req.patchForFile
+
 		clearBeforeOutput();
-		evalString(content);
+		evalString(content, done);
 	}
 
-	function evalString (string)
+	function evalString (string, done)
 	{
 		/* instance.clearLine(); */
 		// clear();
