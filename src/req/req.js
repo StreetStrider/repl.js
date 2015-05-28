@@ -18,18 +18,16 @@ var
 	resolve = require('path').resolve,
 	paths   = require('module')._nodeModulePaths;
 
-req.patch = function (module)
+req.patch = function (module, filename)
 {
-	/* @todo: check empty resolve */
-	// cmodule.filename = resolve('file');
-	module.filename = resolve();
+	filename || (filename = '');
+
+	module.filename = resolve(filename);
 	module.paths    = paths(module.filename);
 }
 
-
-/* patch-in */
 /* patches target MODULE environment for proper requiring modules on-fly */
-var parse = require('./parse'); parse.patch(req.patch);
+var parse = require('./parse'); parse.patchSelf(req.patch);
 
 req.parse = function (seq)
 {
