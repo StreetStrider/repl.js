@@ -2,7 +2,8 @@
 
 
 var
-	local = require('../req').local,
+	req   = require('../req'),
+	local = req.local,
 	clc   = local('cli-color'),
 
 	c = local('aux.js/fn/constrain'),
@@ -16,13 +17,12 @@ module.exports = function (instance, console, argopts)
 	}
 	else if (argopts.file)
 	{
-		var content = read(argopts.file);
-		/* @todo setup proper `require` */
-
-		// req.patchForFile
+		var
+			filename = argopts.file,
+			content  = read(filename);
 
 		clearBeforeOutput();
-		evalString(content, done);
+		evalString(content, req.patchForFile(instance.context, filename, done));
 	}
 
 	function evalString (string, done)

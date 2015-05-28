@@ -14,6 +14,30 @@ req.inRepl = function (repl)
 	req.patch(repl.context.module);
 }
 
+req.patchForFile = function (context, filename, done)
+{
+	var module = context.module;
+
+	var prev =
+	{
+		filename: module.filename,
+		exports:  module.exports
+	}
+
+	req.patch(module, filename);
+
+	module.exports  = {};
+	context.exports = {};
+
+	return function ()
+	{
+		req.patch(module, prev.filename);
+		module.exports = prev.exports;
+
+		done();
+	}
+}
+
 var
 	resolve = require('path').resolve,
 	paths   = require('module')._nodeModulePaths;
