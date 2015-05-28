@@ -58,6 +58,7 @@ module.exports = nl(lines
 	line(pad(), option('--eval', '-e "<script>"', 'eval script')),
 	line(pad(), option('--file', '-f <file>', 'eval file')),
 	line(pad(), option('--print', '-p', 'eval script or file and print result')),
+	line(pad(), option('--quit', '-q', 'do not enter interactive mode after eval')),
 	line(pad(), option('--clean', 'start repl without utilities')),
 	line(pad(), option('-?', '-h', '--help', 'show brief help')),
 	line(pad(), option('-v', '--version', 'show repl.js version'))

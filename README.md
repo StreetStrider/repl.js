@@ -19,6 +19,7 @@ $ repl.js -e 'var x = 1;'
 # execute file
 $ repl.js -f script.js
 ```
+If you just want execute script and do not enter interactive mode (just like `node` do), you can pass `-q` option.
 
 ### promises
 When evaling returns promise, it will not be outputted in «raw view» (like `{ then: … }`), instead REPL will await for its fulfilling.

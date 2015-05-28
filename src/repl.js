@@ -28,6 +28,7 @@ repl.run = function (argv)
 			'clean',
 
 			'print',
+			'quit',
 
 			'help',
 			'version',
@@ -42,6 +43,7 @@ repl.run = function (argv)
 			eval:  [ 'e' ],
 			file:  [ 'f' ],
 			print: [ 'p' ],
+			quit:  [ 'q' ],
 			help:  [ 'h', '?' ],
 			version: [ 'v' ],
 		}

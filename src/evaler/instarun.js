@@ -40,7 +40,15 @@ module.exports = function (instance, console, argopts)
 			clearBeforeOutput();
 			output(value);
 		}
-		instance.displayPrompt();
+
+		if (argopts.quit)
+		{
+			process.exit();
+		}
+		else
+		{
+			instance.displayPrompt();
+		}
 	}
 
 	function clearBeforeOutput ()
