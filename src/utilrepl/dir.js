@@ -7,14 +7,21 @@ exports.dir = function (repl, console)
 		context = repl.context,
 		_dir    = console.dir;
 
-	function dir (object)
+	function dir (object, options)
 	{
 		if (! arguments.length)
 		{
 			object = context;
 		}
 
-		_dir(object, 0);
+		if (arguments.length <= 1)
+		{
+			_dir(object, 0);
+		}
+		else
+		{
+			_dir.apply(null, arguments);
+		}
 	}
 
 	return dir;
