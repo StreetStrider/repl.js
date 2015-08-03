@@ -9,6 +9,12 @@ Specify modules (with optional aliases) you want to be loaded into REPL onstart.
 ```sh
 $ repl.js path lodash Promise=bluebird ./file.js file=./other_file.js
 ```
+Here:
+ * std module `path` will be loaded as `path`
+ * node_modules `lodash` will be loaded as `lodash`
+ * node_modules `bluebird` will be loaded as `Promise`
+ * local file `./file.js` will be loaded as `file`
+ * local file `./other_file.js` will be loaded as `file` and will overwrite previously loaded file
 
 ### execute & enter interactive
 Supply script of filename to execute. After executing REPL will be started with script's results.
