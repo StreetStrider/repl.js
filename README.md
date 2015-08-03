@@ -50,15 +50,6 @@ If you do not want utilities to be loaded into REPL, pass `--clean` option.
 $ repl.js --clean
 ```
 
-## todo (v2)
-For now `v2` is stable and installed by default. Some features are still in progress:
-* [ ] per-expressing directives to modify eval process @r, @dir, @off, @log, @sg, @src
-* [x] `node -p -e <"expr">` + enter interactive mode
-* [x] `node -p -f <script.js>` + enter interactive mode
-* [ ] teach stdin?
-* [x] require alias=module onstart
-* [x] thenable
-
 ## license
 MIT.
 © StreetStrider, 2013 — 2015.
