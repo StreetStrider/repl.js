@@ -17,7 +17,7 @@ Here:
  * local file `./other_file.js` will be loaded as `file` and will overwrite previously loaded file
 
 ### execute & enter interactive
-Supply script of filename to execute. After executing REPL will be started with script's results.
+Supply script or filename to execute. After executing REPL will be started with script's results.
 ```sh
 # execute script and inspect in results in interactive mode
 $ repl.js -e 'var x = 1;'
