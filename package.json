@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "2.1.1",
+	"version": "2.2.0-pre",
 
 	"description": "Node.js REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
@@ -23,8 +23,11 @@
 	"bugs":       { "url": "https://github.com/StreetStrider/repl.js/issues" },
 
 	"main": "src/repl",
-	"bin":  "run/repl",
-
+	"bin":
+	{
+		"repl.js": "run/repl",
+		"repljs":  "run/repl"
+	},
 	"scripts":
 	{
 		"start": "node run/repl"
