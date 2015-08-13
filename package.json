@@ -30,7 +30,8 @@
 	},
 	"scripts":
 	{
-		"start": "node run/repl"
+		"start": "node run/repl",
+		"doctoc": "doctoc README.md"
 	},
 
 	"dependencies":
@@ -40,5 +41,10 @@
 		"cli-color": "^1",
 		"minimist": "^1.1.1",
 		"promise": "^7"
+	},
+
+	"devDependencies":
+	{
+		"doctoc": "^0.15.0"
 	}
 }

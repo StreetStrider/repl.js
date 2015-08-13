@@ -5,7 +5,6 @@ This module is a drop-in replacement for node std `repl`. Can be used as shell &
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [features](#features)
   - [on-start requiring](#on-start-requiring)
