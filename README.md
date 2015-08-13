@@ -6,6 +6,7 @@ This module is a drop-in replacement for node std `repl`. Can be used as shell &
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [features](#features)
   - [on-start requiring](#on-start-requiring)
   - [execute & enter interactive](#execute-&-enter-interactive)
@@ -13,6 +14,7 @@ This module is a drop-in replacement for node std `repl`. Can be used as shell &
   - [robust require](#robust-require)
   - [useful utils](#useful-utils)
   - [clean environment](#clean-environment)
+- [note for windows users](#note-for-windows-users)
 - [license](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -63,6 +65,9 @@ If you do not want utilities to be loaded into REPL, pass `--clean` option.
 ```sh
 $ repl.js --clean
 ```
+
+## note for windows users
+Use `repljs` executable instead of `repl.js` in your `cmd`.
 
 ## license
 MIT.
