@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "2.2.0",
+	"version": "2.2.1",
 
 	"description": "Node.js / io.js REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
