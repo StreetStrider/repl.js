@@ -1,8 +1,8 @@
 {
 	"name"   : "repl.js",
-	"version": "2.2.0-pre2",
+	"version": "2.2.0",
 
-	"description": "Node.js REPL with promise support & CLI module requiring",
+	"description": "Node.js / io.js REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
 	"license": "MIT",
 
@@ -15,7 +15,7 @@
 		"require", "module", "resolve",
 		"functional",
 		"util", "inspect", "dir", "log", "debug",
-		"node"
+		"node", "io", "iojs"
 	],
 
 	"homepage":            "https://github.com/StreetStrider/repl.js",
