@@ -7,5 +7,5 @@ module.exports =
 	log: require('./log'),
 	dir: require('./dir'),
 	sg:  require('./sg'),
-	aux: require('./aux')
+	aux: require('./ax')
 };
