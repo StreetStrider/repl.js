@@ -29,10 +29,18 @@ exports.dir = function (repl, console)
 
 exports.writer = function (console)
 {
-	var retrieve = console.dir.retrieve;
+	var retrieve = console.dir.retrieve
+	var sg = require('./sg').retrieve
 
 	return function writer (object)
 	{
-		return retrieve(object, 1);
+		if (typeof object !== 'function')
+		{
+			return retrieve(object, 1)
+		}
+		else
+		{
+			return sg(object)
+		}
 	}
 }
