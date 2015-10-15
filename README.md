@@ -9,7 +9,7 @@ This module is a drop-in replacement for node std `repl`. Can be used as shell &
 
 - [features](#features)
   - [on-start requiring](#on-start-requiring)
-  - [execute & enter interactive](#execute-&-enter-interactive)
+  - [execute & enter interactive](#execute--enter-interactive)
   - [promises](#promises)
   - [robust require](#robust-require)
   - [useful utils](#useful-utils)
