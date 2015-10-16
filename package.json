@@ -30,7 +30,7 @@
 	},
 	"scripts":
 	{
-		"start": "node run/repl",
+		"start":  "node run/repl",
 		"doctoc": "doctoc README.md"
 	},
 
