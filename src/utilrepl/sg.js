@@ -29,7 +29,8 @@ module.exports = function (repl, console)
 }
 
 
-var re = /^(function(?:[^{]*))({[\s\S]*)/
+var Re = /^(function(?:[^{]*))({[\s\S]*)/
+var ReLambda = /(.+)=>([\s\S]*)/
 
 var bold = require('cli-color').bold
 
@@ -43,7 +44,17 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 		return null
 	}
 
+	if (isLambda(fn))
+	{
+		re = ReLambda;
+	}
+	else
+	{
+		re = Re;
+	}
+
 	var view  = String(fn)
+
 	var match = re.exec(view)
 	var out
 
@@ -64,6 +75,11 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 	}
 	else
 	{
-		return null
+		return 'doesn\'t look like a function…, regexp is not perfect (and cannot be), post an issue'
 	}
+}
+
+function isLambda (fn)
+{
+	return fn.prototype == null
 }

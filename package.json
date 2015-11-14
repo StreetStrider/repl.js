@@ -1,6 +1,6 @@
 {
 	"name"   : "repl.js",
-	"version": "2.3.0",
+	"version": "2.3.1",
 
 	"description": "Node.js / io.js REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
@@ -32,6 +32,11 @@
 	{
 		"start":  "node run/repl",
 		"doctoc": "doctoc README.md"
+	},
+
+	"engines":
+	{
+		"node": ">=0.10"
 	},
 
 	"dependencies":
