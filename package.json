@@ -2,7 +2,7 @@
 	"name"   : "repl.js",
 	"version": "2.3.1",
 
-	"description": "Node.js / io.js REPL with promise support & CLI module requiring",
+	"description": "Node.js REPL with promise support & CLI module requiring",
 	"author":  "StreetStrider <teamfortresslife@gmail.com>",
 	"license": "MIT",
 

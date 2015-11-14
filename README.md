@@ -1,5 +1,5 @@
 # repl.js
-> Node.js / io.js REPL with promise support & CLI module requiring.
+> Node.js REPL with promise support & CLI module requiring.
 
 This module is a drop-in replacement for node std `repl`. Can be used as shell & via API.
 
