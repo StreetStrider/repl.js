@@ -44,22 +44,18 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 		return null
 	}
 
-	if (isLambda(fn))
-	{
-		re = ReLambda;
-	}
-	else
-	{
-		re = Re;
-	}
-
 	var view  = String(fn)
+	var match = ReLambda.exec(view)
 
-	var match = re.exec(view)
-	var out
+	if (! match)
+	{
+		match = Re.exec(view)
+	}
 
 	if (match)
 	{
+		var out
+
 		if (isBodyToo)
 		{
 			out = bold(match[1]) + match[2];
@@ -77,9 +73,4 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 	{
 		return 'doesn\'t look like a function…, regexp is not perfect (and cannot be), post an issue'
 	}
-}
-
-function isLambda (fn)
-{
-	return fn.prototype == null
 }
