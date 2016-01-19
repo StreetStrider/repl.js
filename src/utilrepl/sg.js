@@ -44,7 +44,7 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 		return null
 	}
 
-	var view  = String(fn)
+	var view  = toSource(fn)
 	var match = ReLambda.exec(view)
 
 	if (! match)
@@ -65,7 +65,15 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 			out = bold(match[1].trim());
 		}
 
-		out = bordered(out)
+		var view__user = String(fn)
+		var header = ''
+
+		if (view__user !== view)
+		{
+			header = ' ‖ ' + view__user + '\n'
+		}
+
+		out = header + bordered(out)
 
 		return out
 	}
@@ -73,4 +81,11 @@ var retrieve = module.exports.retrieve = function (fn, isBodyToo)
 	{
 		return 'doesn\'t look like a function…, regexp is not perfect (and cannot be), post an issue'
 	}
+}
+
+var fSource = Function.prototype.toString
+
+function toSource (fn)
+{
+	return fSource.call(fn)
 }
