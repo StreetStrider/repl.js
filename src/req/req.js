@@ -11,7 +11,10 @@ req.local = function (path)
 
 req.inRepl = function (repl)
 {
-	req.patch(repl.context.module);
+	var context = repl.context
+
+	req.patch(context.module)
+	context.require = context.module.require
 }
 
 req.patchForFile = function (context, filename, done)
