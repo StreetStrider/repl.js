@@ -1,4 +1,4 @@
-# repl.js
+# repl.js [![license|mit](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt) [![npm|repl.js](http://img.shields.io/badge/npm-repl.js-CB3837.svg?style=flat-square)](https://www.npmjs.org/package/repl.js)
 > Node.js REPL with promise support & CLI module requiring.
 
 This module is a drop-in replacement for node std `repl`. Can be used as shell & via API.
