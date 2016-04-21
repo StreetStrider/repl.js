@@ -35,7 +35,7 @@ Here:
 ### execute & enter interactive
 Supply script or filename to execute. After executing REPL will be started with script's results.
 ```sh
-# execute script and inspect in results in interactive mode
+# execute script and inspect its results in interactive mode
 $ repl.js -e 'var x = 1;'
 
 # execute file
