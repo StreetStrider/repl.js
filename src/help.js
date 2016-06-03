@@ -1,12 +1,10 @@
 
 
 var
-	local = require('./req').local,
+	cat = require('aux.js/array/cat'),
+	unary = require('aux.js/fn/unary'),
 
-	cat = local('aux.js/array/cat'),
-	unary = local('aux.js/fn/unary'),
-
-	colors = local('cli-color'),
+	colors = require('cli-color'),
 	bold = unary(colors.bold);
 
 function line ()

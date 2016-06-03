@@ -3,10 +3,9 @@
 
 var
 	req   = require('../req'),
-	local = req.local,
-	clc   = local('cli-color'),
+	clc   = require('cli-color'),
 
-	c = local('aux.js/fn/constrain'),
+	c = require('aux.js/fn/constrain'),
 	read = c(require('fs').readFileSync, c, 'utf-8');
 
 module.exports = function (instance, console, argopts)

@@ -4,11 +4,10 @@
 var
 	vm = require('vm'),
 
-	local = require('../req').local,
-	Promise = local('promise'),
+	Promise = require('promise'),
 
 	specialColor = require('util').inspect.styles.special,
-	clc = local('cli-color'),
+	clc = require('cli-color'),
 	color = clc[specialColor],
 	erase = clc.move.up(1) + clc.erase.line;
 

@@ -1,16 +1,13 @@
 
 
 
-var
-	local = require('../req').local,
-
-	extend = local('aux.js/object/extend');
+var extend = require('aux.js/object/extend');
 
 module.exports = function (repl)
 {
 	var context = repl.context;
 
-	var aux = context.aux = local('aux.js');
+	var aux = context.aux = require('aux.js');
 
 	/* fn */
 	extend(context, aux.fn);

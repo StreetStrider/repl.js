@@ -10,9 +10,9 @@ var
 	std  = require('repl');
 
 var
-	extend   = req.local('aux.js/object/extend'),
-	colors   = req.local('cli-color'),
-	minimist = req.local('minimist');
+	extend   = require('aux.js/object/extend'),
+	colors   = require('cli-color'),
+	minimist = require('minimist');
 
 var
 	manifest = require('../package.json'),

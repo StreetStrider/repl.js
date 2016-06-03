@@ -1,10 +1,8 @@
 
 
 var
-	local = require('../req').local,
-
-	cat     = local('aux.js/array/cat'),
-	partial = local('aux.js/fn/partial');
+	cat     = require('aux.js/array/cat'),
+	partial = require('aux.js/fn/partial');
 
 module.exports = function (repl, console)
 {

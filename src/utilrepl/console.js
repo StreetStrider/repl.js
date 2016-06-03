@@ -3,10 +3,7 @@
 
 var uconsole = module.exports = {};
 
-var
-	local = require('../req').local,
-
-	Console = local('console-ultimate');
+var Console = require('console-ultimate');
 
 uconsole.stream = function (options)
 {
@@ -24,5 +21,5 @@ uconsole.inRepl = function (repl, console)
 {
 	var context = repl.context;
 
-	local('console-ultimate/global').replaceAt(context, console);
+	require('console-ultimate/global').replaceAt(context, console);
 }
