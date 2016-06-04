@@ -48,8 +48,8 @@ req.patch = function (module, filename)
 	module.paths    = paths(module.filename);
 }
 
-/* patches target MODULE environment for proper requiring modules on-fly */
-var parse = require('./parse'); parse.patchSelf(req.patch);
+
+var parse = require('./parse');
 
 req.parse = function (seq)
 {
@@ -58,9 +58,13 @@ req.parse = function (seq)
 	.map(parse.build);
 }
 
+var Attempter = parse.Attempter
+
 req.process = function (mods, console)
 {
-	mods = mods.map(parse.attempt);
+	var attempter = Attempter()
+
+	mods = mods.map(attempter);
 	mods = mods.map(parse.canonize);
 
 	mods.forEach(parse.report(console));

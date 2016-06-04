@@ -83,52 +83,60 @@ function pure (item)
 }
 
 
-/* patches current MODULE environment for proper requiring modules on-fly */
-parse.patchSelf = function (patchFn)
+var p_resolve = require('path').resolve
+var Module = require('module')
+
+parse.Attempter = function (filename)
 {
-	patchFn(module);
+	filename || (filename = process.cwd() + '/repl-module.js')
+
+	var module = new Module(filename)
+
+	module.paths = Module._nodeModulePaths(filename)
+
+	var require = Module._load
+	var resolve = Module._resolveFilename
+
+	var attempter = passerror(function (item)
+	{
+		try
+		{
+			var
+				path = item.path,
+				orig = path;
+
+			path = resolve(path, module);
+		}
+		catch (e)
+		{
+			path = p_resolve(item.path);
+
+		try
+		{
+			path = resolve(path, module);
+		}
+		catch (e)
+		{
+			return {
+				error: 'resolve',
+				input: orig
+			};
+		}
+
+		}
+		/* else */
+		{
+			return {
+				alias: item.alias,
+				orig:  orig,
+				path:  path,
+				mod:   require(path, module)
+			};
+		}
+	})
+
+	return attempter
 }
-
-var
-	resolve = require('path').resolve;
-
-parse.attempt = passerror(function (item)
-{
-	try
-	{
-		var
-			path = item.path,
-			orig = path;
-
-		path = require.resolve(path);
-	}
-	catch (e)
-	{
-		path = resolve(item.path);
-
-	try
-	{
-		path = require.resolve(path);
-	}
-	catch (e)
-	{
-		return {
-			error: 'resolve',
-			input: orig
-		};
-	}
-
-	}
-	/* else */
-	{
-		return {
-			alias: item.alias,
-			orig:  orig,
-			path:  path,
-			mod:   require(path)
-		};
-	}
-})
 
 
 var
