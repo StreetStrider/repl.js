@@ -143,11 +143,13 @@ parse.Module = function (filename)
 
 	var module = new Module(filename)
 
+	module.filename = filename
+
 	module.paths = Module._nodeModulePaths(filename)
 
-	module.require.resolve = function (request)
+	module.require.resolve = function (path)
 	{
-		return Module._resolveFilename(request, module)
+		return Module._resolveFilename(path, module)
 	}
 
 	return module
