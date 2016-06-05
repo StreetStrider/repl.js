@@ -125,7 +125,6 @@ repl.start = function (options)
 			context.manifest = manifest;
 		}
 
-		req.inRepl(instance);
 		req.extend(instance, mods);
 	}
 }
