@@ -88,14 +88,13 @@ var Module = require('module')
 
 parse.Attempter = function (filename)
 {
-	filename || (filename = process.cwd() + '/repl-module.js')
+	var module = parse.Module(filename)
 
-	var module = new Module(filename)
+	// var require = Module._load
+	// var resolve = Module._resolveFilename
 
-	module.paths = Module._nodeModulePaths(filename)
-
-	var require = Module._load
-	var resolve = Module._resolveFilename
+	var require = module.require
+	var resolve = require.resolve
 
 	var attempter = passerror(function (item)
 	{
@@ -136,6 +135,22 @@ parse.Attempter = function (filename)
 	})
 
 	return attempter
+}
+
+parse.Module = function (filename)
+{
+	filename || (filename = process.cwd() + '/repl-module.js')
+
+	var module = new Module(filename)
+
+	module.paths = Module._nodeModulePaths(filename)
+
+	module.require.resolve = function (request)
+	{
+		return Module._resolveFilename(request, module)
+	}
+
+	return module
 }
 
 
