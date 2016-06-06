@@ -45,12 +45,7 @@ module.exports = function Evaler (options, console)
 		}
 		catch (e)
 		{
-			/* don't know what actually I did */
-			if (code !== '.scope')
-			{
-				console.error(e);
-			}
-			return callback();
+			return callback(e);
 		}
 
 		new Promise(function (rs, rj)
