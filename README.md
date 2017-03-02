@@ -71,4 +71,4 @@ Use `repljs` executable instead of `repl.js` in your `cmd`.
 
 ## license
 MIT.
-© StreetStrider, 2013 — 2016.
+© Strider, 2013 — 2017.

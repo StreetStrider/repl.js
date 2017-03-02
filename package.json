@@ -1,9 +1,9 @@
 {
 	"name"   : "repl.js",
-	"version": "2.3.6",
+	"version": "2.3.7",
 
 	"description": "Node.js REPL with promise support & CLI module requiring",
-	"author":  "StreetStrider <teamfortresslife@gmail.com>",
+	"author":  "Strider <strange.transistor@gmail.com>",
 	"license": "MIT",
 
 	"keywords":
@@ -36,7 +36,7 @@
 
 	"engines":
 	{
-		"node": ">=0.10"
+		"node": ">=4"
 	},
 
 	"dependencies":
